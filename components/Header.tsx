@@ -1,24 +1,22 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { DrawerToggleButton } from "@react-navigation/drawer";
+import { ThemedText } from "@/components/ThemedText";
 
-export const Header = () => {
+export const Header = ({ title }: { title: string }) => {
   return (
     <View style={styles.intro}>
       <DrawerToggleButton tintColor={"#000"} />
+      <ThemedText type="title">{title}</ThemedText>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    color: "white",
-    marginLeft: 14,
-  },
   intro: {
     width: "100%",
-    height: 90,
+    height: 40,
     padding: 6,
-    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
   },
 });

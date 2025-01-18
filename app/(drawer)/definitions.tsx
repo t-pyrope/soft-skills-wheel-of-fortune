@@ -1,11 +1,35 @@
-import { StyleSheet } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { Header } from "@/components/Header";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ThemedText } from "@/components/ThemedText";
+import { DEFINITIONS, SoftSkill } from "@/constants/softSkills";
+
+const Item = ({
+  title,
+  definition,
+  index,
+}: {
+  title: SoftSkill;
+  definition: string;
+  index: number;
+}) => (
+  <View style={styles.item}>
+    <ThemedText type="subtitle" style={styles.subtitle}>
+      {index}. {title}
+    </ThemedText>
+    <ThemedText>{definition}</ThemedText>
+  </View>
+);
 
 export default function Definitions() {
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
+      <Header title="Definitions" />
+      <FlatList
+        data={DEFINITIONS}
+        renderItem={({ item }) => <Item {...item} />}
+        keyExtractor={(item) => item.title}
+      />
     </SafeAreaView>
   );
 }
@@ -13,16 +37,15 @@ export default function Definitions() {
 const styles = StyleSheet.create({
   container: {
     gap: 8,
-    position: 'static',
+    position: "static",
+    padding: 20,
+    paddingBottom: 40,
   },
-  inner: {
-    padding: 10,
+  item: {
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
-  link: {
-    textDecorationLine: 'underline',
-    color: '',
-  },
-  title: {
-    fontSize: 18,
+  subtitle: {
+    marginBlockEnd: 8,
   },
 });
