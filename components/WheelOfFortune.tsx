@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import Svg, { G, Path } from "react-native-svg";
 import Animated, {
   useSharedValue,
@@ -9,6 +9,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { SOFT_SKILLS } from "@/constants/softSkills";
+import { ThemedText } from "@/components/ThemedText";
 
 const segmentAngle = 360 / SOFT_SKILLS.length; // Calculate angle for each segment
 
@@ -26,7 +27,7 @@ const WheelOfFortune = () => {
     const finalAngle = randomRounds * 360 + extraAngle; // Total spin (5 rounds + random angle)
 
     const selectedSegmentIndex = Math.floor(
-      ((360 - (finalAngle % 360)) / segmentAngle) %SOFT_SKILLS.length,
+      ((360 - (finalAngle % 360)) / segmentAngle) % SOFT_SKILLS.length,
     );
 
     rotation.value = withTiming(
@@ -38,9 +39,12 @@ const WheelOfFortune = () => {
       () => {
         // Reset rotation to within [0, 360] degrees after spinning
         rotation.value = rotation.value % 360;
-        setPrize(SOFT_SKILLS[selectedSegmentIndex]); // Set the prize
       },
     );
+
+    setTimeout(() => {
+      setPrize(SOFT_SKILLS[selectedSegmentIndex]); // Set the prize
+    }, 2700);
   };
 
   // Animate the wheel's rotation using `useAnimatedStyle`
@@ -86,44 +90,52 @@ const WheelOfFortune = () => {
         </Svg>
       </Animated.View>
 
-      <TouchableOpacity style={styles.button} onPress={spinWheel}>
-        <Text style={styles.buttonText}>Spin</Text>
+      <TouchableOpacity onPress={spinWheel} style={styles.button}>
+        <ThemedText style={styles.buttonText} type="subtitle">
+          Spin
+        </ThemedText>
       </TouchableOpacity>
-
-      {prize ? <Text style={styles.prizeText}>🎉 You Won: {prize}</Text> : null}
+      {prize ? (
+        <ThemedText style={styles.prizeText}>🎉 You Won: {prize}</ThemedText>
+      ) : null}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5F5F5",
+    position: "relative",
   },
   wheelContainer: {
+    position: "absolute",
+    top: 170,
     height: 300,
     width: 300,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 50,
   },
   button: {
-    backgroundColor: "#1E90FF",
-    padding: 15,
+    marginBlockStart: 20,
+    marginBlockEnd: 15,
+    width: 100,
+    height: 50,
+    backgroundColor: "#e245cc",
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 10,
   },
   buttonText: {
-    color: "#FFF",
-    fontSize: 18,
-    fontWeight: "bold",
+    color: "white",
   },
   prizeText: {
-    marginTop: 20,
+    marginTop: 10,
     fontSize: 20,
     fontWeight: "bold",
     color: "#333",
+    height: 50,
+    textAlign: "center",
   },
 });
 
