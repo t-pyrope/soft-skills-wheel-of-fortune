@@ -15,8 +15,11 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     gap: 8,
-    position: "static",
     padding: 20,
     paddingBottom: 40,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

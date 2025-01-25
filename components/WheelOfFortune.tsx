@@ -10,6 +10,8 @@ import Animated, {
 
 import { SOFT_SKILLS } from "@/constants/softSkills";
 import { ThemedText } from "@/components/ThemedText";
+import { WheelBackground } from "@/components/WheelBackground";
+import { WheelLights } from "@/components/WheelLights";
 
 const segmentAngle = 360 / SOFT_SKILLS.length; // Calculate angle for each segment
 
@@ -58,7 +60,10 @@ const WheelOfFortune = () => {
 
   return (
     <View style={styles.container}>
-      <Animated.View style={[styles.wheelContainer, animatedStyle]}>
+      <View style={styles.container}>
+        <WheelBackground />
+      </View>
+      <Animated.View style={[styles.wheel, animatedStyle]}>
         <Svg height="300" width="300" viewBox="0 0 100 100">
           <G rotation="0" origin="50, 50">
             {SOFT_SKILLS.map((item, index) => {
@@ -80,8 +85,12 @@ const WheelOfFortune = () => {
                 <Path
                   key={index}
                   d={pathData}
-                  fill={index % 2 === 0 ? "#FF9F1C" : "#2EC4B6"} // Alternating colors
-                  stroke="#FFF"
+                  fill={
+                    index % 2 === 0
+                      ? "rgba(246,153,239,0.68)"
+                      : "rgba(165,64,223,0.89)"
+                  } // Alternating colors
+                  stroke="#FFFFFF"
                   strokeWidth="0.5"
                 />
               );
@@ -90,6 +99,8 @@ const WheelOfFortune = () => {
         </Svg>
       </Animated.View>
 
+      <View style={styles.innerShadow} />
+      <WheelLights />
       <TouchableOpacity onPress={spinWheel} style={styles.button}>
         <ThemedText style={styles.buttonText} type="subtitle">
           Spin
@@ -108,9 +119,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "relative",
   },
-  wheelContainer: {
+  wheelHolder: {
     position: "absolute",
-    top: 170,
+    top: 150,
+    height: 340,
+    width: 340,
+    borderRadius: "50%",
+    backgroundImage: "linear-gradient(#9b45e2, #8445e2)",
+    backgroundColor: "#8445e2",
+  },
+  wheel: {
+    position: "absolute",
+    top: 20,
     height: 300,
     width: 300,
     alignItems: "center",
@@ -121,7 +141,7 @@ const styles = StyleSheet.create({
     marginBlockEnd: 15,
     width: 100,
     height: 50,
-    backgroundColor: "#e245cc",
+    backgroundColor: "#4b59ff",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -137,6 +157,7 @@ const styles = StyleSheet.create({
     height: 50,
     textAlign: "center",
   },
+  innerShadow: {},
 });
 
 export default WheelOfFortune;

@@ -8,6 +8,7 @@ export const SOFT_SKILLS = [
   "Dependability and attention to detail",
   "Empathy and active listening",
   "Leadership and social influence",
+  "Quality control",
 ] as const;
 
 export type SoftSkill = (typeof SOFT_SKILLS)[number];
@@ -71,6 +72,11 @@ export const DEFINITIONS: {
     definition:
       "Leadership is a set of behaviors used to help people align their collective direction, to execute strategic plans, and to continually renew an organization. Social influence involves intentional and unintentional efforts to change another person's beliefs, attitudes, or behavior",
     source: "McKinsey, ScienceDirect",
+  },
+  {
+    title: "Quality control" as const,
+    definition: "",
+    source: "",
   },
 ].map((item, i) => ({
   ...item,
