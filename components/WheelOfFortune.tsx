@@ -12,6 +12,7 @@ import { SOFT_SKILLS } from "@/constants/softSkills";
 import { ThemedText } from "@/components/ThemedText";
 import { WheelBackground } from "@/components/WheelBackground";
 import { WheelLights } from "@/components/WheelLights";
+import { i18n } from "@/i18n/config";
 
 const segmentAngle = 360 / SOFT_SKILLS.length; // Calculate angle for each segment
 
@@ -103,11 +104,13 @@ const WheelOfFortune = () => {
       <WheelLights />
       <TouchableOpacity onPress={spinWheel} style={styles.button}>
         <ThemedText style={styles.buttonText} type="subtitle">
-          Spin
+          {i18n.t("wheel.spin")}
         </ThemedText>
       </TouchableOpacity>
       {prize ? (
-        <ThemedText style={styles.prizeText}>🎉 You Won: {prize}</ThemedText>
+        <ThemedText style={styles.prizeText}>
+          {i18n.t("wheel.youWon", { skill: prize })}
+        </ThemedText>
       ) : null}
     </View>
   );
@@ -139,8 +142,8 @@ const styles = StyleSheet.create({
   button: {
     marginBlockStart: 20,
     marginBlockEnd: 15,
-    width: 100,
     height: 50,
+    paddingInline: 20,
     backgroundColor: "#4b59ff",
     justifyContent: "center",
     alignItems: "center",

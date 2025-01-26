@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/ThemedText";
 import { DEFINITIONS, SoftSkill } from "@/constants/softSkills";
+import { i18n } from "@/i18n/config";
 
 const Item = ({
   title,
@@ -24,7 +25,7 @@ const Item = ({
 export default function Definitions() {
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Definitions" />
+      <Header title={i18n.t("definitions.title")} />
       <FlatList
         data={DEFINITIONS}
         renderItem={({ item }) => <Item {...item} />}
