@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import Svg, { G, Path } from "react-native-svg";
+import Svg, {G, Path, Text, TextPath, TSpan} from "react-native-svg";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -8,13 +8,13 @@ import Animated, {
   Easing,
 } from "react-native-reanimated";
 
-import { SOFT_SKILLS } from "@/constants/softSkills";
+import { DEFINITIONS } from "@/constants/softSkills";
 import { ThemedText } from "@/components/ThemedText";
 import { WheelBackground } from "@/components/WheelBackground";
 import { WheelLights } from "@/components/WheelLights";
 import { i18n } from "@/i18n/config";
 
-const segmentAngle = 360 / SOFT_SKILLS.length; // Calculate angle for each segment
+const segmentAngle = 360 / DEFINITIONS.length; // Calculate angle for each segment
 
 const WheelOfFortune = () => {
   const [prize, setPrize] = useState(""); // Store selected prize
@@ -30,7 +30,7 @@ const WheelOfFortune = () => {
     const finalAngle = randomRounds * 360 + extraAngle; // Total spin (5 rounds + random angle)
 
     const selectedSegmentIndex = Math.floor(
-      ((360 - (finalAngle % 360)) / segmentAngle) % SOFT_SKILLS.length,
+      ((360 - (finalAngle % 360)) / segmentAngle) % DEFINITIONS.length,
     );
 
     rotation.value = withTiming(
@@ -46,7 +46,7 @@ const WheelOfFortune = () => {
     );
 
     setTimeout(() => {
-      setPrize(SOFT_SKILLS[selectedSegmentIndex]); // Set the prize
+      setPrize(DEFINITIONS[selectedSegmentIndex].title); // Set the prize
     }, 2700);
   };
 
@@ -67,7 +67,7 @@ const WheelOfFortune = () => {
       <Animated.View style={[styles.wheel, animatedStyle]}>
         <Svg height="300" width="300" viewBox="0 0 100 100">
           <G rotation="0" origin="50, 50">
-            {SOFT_SKILLS.map((item, index) => {
+            {DEFINITIONS.map(({ emoji }, index) => {
               const startAngle = index * segmentAngle; // Segment start angle
               const endAngle = (index + 1) * segmentAngle; // Segment end angle
               const largeArcFlag = endAngle - startAngle > 180 ? 1 : 0;
@@ -83,17 +83,33 @@ const WheelOfFortune = () => {
                 Z
               `;
               return (
-                <Path
-                  key={index}
-                  d={pathData}
-                  fill={
-                    index % 2 === 0
-                      ? "rgba(246,153,239,0.68)"
-                      : "rgba(165,64,223,0.89)"
-                  } // Alternating colors
-                  stroke="#FFFFFF"
-                  strokeWidth="0.5"
-                />
+                <React.Fragment key={index}>
+                  <Path
+                    d={pathData}
+                    fill={
+                      index % 2 === 0
+                        ? "rgba(246,153,239,0.68)"
+                        : "rgba(165,64,223,0.89)"
+                    } // Alternating colors
+                    stroke="#FFFFFF"
+                    strokeWidth="0.5"
+                    id={`part-${index}`}
+                  />
+                  <Text>
+                    <TextPath
+                      href={`#part-${index}`}
+                      startOffset="33"
+                      text-anchor=""
+                      // dominant-baseline="middle"
+                      // font-size={10}
+                      fillOpacity={0.8}
+                    >
+                      <TSpan x={0} dy={-9} fontSize={8}>
+                        {emoji}
+                      </TSpan>
+                    </TextPath>
+                  </Text>
+                </React.Fragment>
               );
             })}
           </G>
