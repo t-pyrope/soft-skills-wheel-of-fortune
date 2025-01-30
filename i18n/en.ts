@@ -45,7 +45,8 @@ export const en = {
     },
     qualityControl: {
       name: "Quality control",
-      definition: "",
+      definition:
+        "Process of verifying that a product or service meets specified standards or requirements",
     },
   },
   wheel: {

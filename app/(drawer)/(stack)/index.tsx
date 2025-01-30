@@ -1,9 +1,10 @@
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import WheelOfFortune from "@/components/WheelOfFortune";
 import { Header } from "@/components/Header";
-import { StyleSheet } from "react-native";
 import { i18n } from "@/i18n/config";
+import { app } from "@/firebaseConfig";
 
 export default function HomeScreen() {
   return (

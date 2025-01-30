@@ -45,7 +45,8 @@ export const cs = {
     },
     qualityControl: {
       name: "Kontrola kvality",
-      definition: "",
+      definition:
+        "Proces ověřování, zda produkt nebo služba splňuje stanovené normy nebo požadavky",
     },
   },
   wheel: {

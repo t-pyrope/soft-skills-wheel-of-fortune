@@ -5,12 +5,12 @@ import { i18n } from "@/i18n/config";
 export default function Layout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer screenOptions={{}}>
+      <Drawer screenOptions={{ drawerType: "front" }}>
         <Drawer.Screen
-          name={"index"}
+          name={"(stack)"}
           options={{
-            title: i18n.t("menu.home"),
             headerShown: false,
+            title: i18n.t("menu.home"),
           }}
         />
 

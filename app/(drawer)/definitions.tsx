@@ -2,7 +2,7 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { Header } from "@/components/Header";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/ThemedText";
-import { DEFINITIONS, SoftSkill } from "@/constants/softSkills";
+import { DEFINITIONS } from "@/constants/softSkills";
 import { i18n } from "@/i18n/config";
 
 const Item = ({
@@ -10,7 +10,7 @@ const Item = ({
   definition,
   index,
 }: {
-  title: SoftSkill;
+  title: string;
   definition: string;
   index: number;
 }) => (

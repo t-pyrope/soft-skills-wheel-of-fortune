@@ -1,11 +1,13 @@
+import { router } from "expo-router";
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import Svg, {G, Path, Text, TextPath, TSpan} from "react-native-svg";
+import Svg, { G, Path, Text, TextPath, TSpan } from "react-native-svg";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
   Easing,
+  runOnJS,
 } from "react-native-reanimated";
 
 import { DEFINITIONS } from "@/constants/softSkills";
@@ -13,25 +15,34 @@ import { ThemedText } from "@/components/ThemedText";
 import { WheelBackground } from "@/components/WheelBackground";
 import { WheelLights } from "@/components/WheelLights";
 import { i18n } from "@/i18n/config";
+import { PrizePointer } from "@/components/PrizePointer";
+import { useAppContext } from "@/contexts/AppContext";
 
 const segmentAngle = 360 / DEFINITIONS.length; // Calculate angle for each segment
 
 const WheelOfFortune = () => {
-  const [prize, setPrize] = useState(""); // Store selected prize
+  const [isSpinning, setIsSpinning] = useState(false);
+  const { setPrize } = useAppContext();
 
   // Shared value to track the rotation state
   const rotation = useSharedValue(0);
 
   const spinWheel = () => {
-    const randomRounds = 2; // Number of full rounds
-    const extraAngle = Math.floor(Math.random() * 360); // Random angle within the circle
+    if (isSpinning) {
+      return;
+    }
+
+    const extraAngle =
+      Math.floor(Math.random() * DEFINITIONS.length) * segmentAngle;
 
     // Determine which prize to stop at
-    const finalAngle = randomRounds * 360 + extraAngle; // Total spin (5 rounds + random angle)
+    const finalAngle = 2 * 360 + extraAngle; // Total spin (5 rounds + random angle)
 
     const selectedSegmentIndex = Math.floor(
-      ((360 - (finalAngle % 360)) / segmentAngle) % DEFINITIONS.length,
+      ((360 - extraAngle) / segmentAngle) % DEFINITIONS.length,
     );
+
+    setIsSpinning(true);
 
     rotation.value = withTiming(
       finalAngle,
@@ -40,14 +51,13 @@ const WheelOfFortune = () => {
         easing: Easing.out(Easing.quad),
       },
       () => {
+        runOnJS(setIsSpinning)(false);
+        runOnJS(setPrize)(selectedSegmentIndex);
         // Reset rotation to within [0, 360] degrees after spinning
         rotation.value = rotation.value % 360;
+        runOnJS(router.push)("/youWonModal");
       },
     );
-
-    setTimeout(() => {
-      setPrize(DEFINITIONS[selectedSegmentIndex].title); // Set the prize
-    }, 2700);
   };
 
   // Animate the wheel's rotation using `useAnimatedStyle`
@@ -67,7 +77,7 @@ const WheelOfFortune = () => {
       <Animated.View style={[styles.wheel, animatedStyle]}>
         <Svg height="300" width="300" viewBox="0 0 100 100">
           <G rotation="0" origin="50, 50">
-            {DEFINITIONS.map(({ emoji }, index) => {
+            {DEFINITIONS.map(({ emoji, title }, index) => {
               const startAngle = index * segmentAngle; // Segment start angle
               const endAngle = (index + 1) * segmentAngle; // Segment end angle
               const largeArcFlag = endAngle - startAngle > 180 ? 1 : 0;
@@ -82,15 +92,18 @@ const WheelOfFortune = () => {
                 }
                 Z
               `;
+
+              let color = "rgba(165,64,223,0.89)";
+
+              if (index % 2 === 0) {
+                color = "rgba(246,153,239,0.68)";
+              }
+
               return (
-                <React.Fragment key={index}>
+                <React.Fragment key={title}>
                   <Path
                     d={pathData}
-                    fill={
-                      index % 2 === 0
-                        ? "rgba(246,153,239,0.68)"
-                        : "rgba(165,64,223,0.89)"
-                    } // Alternating colors
+                    fill={color} // Alternating colors
                     stroke="#FFFFFF"
                     strokeWidth="0.5"
                     id={`part-${index}`}
@@ -99,9 +112,6 @@ const WheelOfFortune = () => {
                     <TextPath
                       href={`#part-${index}`}
                       startOffset="33"
-                      text-anchor=""
-                      // dominant-baseline="middle"
-                      // font-size={10}
                       fillOpacity={0.8}
                     >
                       <TSpan x={0} dy={-9} fontSize={8}>
@@ -116,6 +126,8 @@ const WheelOfFortune = () => {
         </Svg>
       </Animated.View>
 
+      <PrizePointer />
+
       <View style={styles.innerShadow} />
       <WheelLights />
       <TouchableOpacity onPress={spinWheel} style={styles.button}>
@@ -123,11 +135,6 @@ const WheelOfFortune = () => {
           {i18n.t("wheel.spin")}
         </ThemedText>
       </TouchableOpacity>
-      {prize ? (
-        <ThemedText style={styles.prizeText}>
-          {i18n.t("wheel.youWon", { skill: prize })}
-        </ThemedText>
-      ) : null}
     </View>
   );
 };
@@ -156,25 +163,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
-    marginBlockStart: 20,
+    marginBlockStart: 30,
     marginBlockEnd: 15,
-    height: 50,
-    paddingInline: 20,
-    backgroundColor: "#4b59ff",
+    height: 56,
+    paddingInline: 30,
+    backgroundColor: "#ff9473",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
+    borderRadius: 15,
   },
   buttonText: {
-    color: "white",
-  },
-  prizeText: {
-    marginTop: 10,
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#333",
-    height: 50,
-    textAlign: "center",
+    color: "#303030",
+    fontWeight: 700,
   },
   innerShadow: {},
 });
