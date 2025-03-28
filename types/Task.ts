@@ -7,3 +7,7 @@ export interface Task {
   };
   parentId: number;
 }
+
+export interface ExtendedTask extends Task {
+  done: boolean;
+}

@@ -52,7 +52,7 @@ const WheelOfFortune = () => {
       },
       () => {
         runOnJS(setIsSpinning)(false);
-        runOnJS(setPrize)(selectedSegmentIndex);
+        runOnJS(setPrize)(selectedSegmentIndex + 1);
         // Reset rotation to within [0, 360] degrees after spinning
         rotation.value = rotation.value % 360;
         runOnJS(router.push)("/youWonModal");

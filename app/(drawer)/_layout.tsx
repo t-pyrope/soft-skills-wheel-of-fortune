@@ -21,6 +21,13 @@ export default function Layout() {
             headerShown: false,
           }}
         />
+        <Drawer.Screen
+          name="opened-tasks"
+          options={{
+            title: i18n.t("menu.openedTasks"),
+            headerShown: false,
+          }}
+        />
       </Drawer>
     </GestureHandlerRootView>
   );

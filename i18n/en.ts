@@ -50,15 +50,24 @@ export const en = {
     },
   },
   wheel: {
-    title: "Soft skills wheel of fortune",
+    title: "Wheel of fortune",
     youWon: "🎉 You Won: %{skill}",
     spin: "Spin the wheel of fortune!",
+    taskWillBeAdded: "Task will be added to opened tasks",
+    unmarkAsDone: "Remove from done",
+    markAsDone: "Mark as done",
+    close: "Close",
   },
   definitions: {
     title: "Definitions",
   },
+  openedTasks: {
+    title: "Opened tasks",
+    noTasks: "There is no open tasks yet"
+  },
   menu: {
     home: "Home",
     definitions: "Definitions",
+    openedTasks: "Opened tasks",
   },
 };

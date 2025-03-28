@@ -50,15 +50,24 @@ export const cs = {
     },
   },
   wheel: {
-    title: "Kolo štěstí měkkých dovedností",
+    title: "Kolo štěstí",
     youWon: "🎉 Vyhrál(a) jste: %{skill}",
     spin: "Roztočit kolo štěstí!",
+    taskWillBeAdded: "Úkol bude přidán do sekce otevřených úkolů",
+    unmarkAsDone: "Označit jako undone",
+    markAsDone: "Označit jako done",
+    close: "Zavřít",
   },
   definitions: {
     title: "Terminologie",
   },
+  openedTasks: {
+    title: "Otevřené úkoly",
+    noTasks: "Zatím nejsou žádné otevřené úkoly"
+  },
   menu: {
     home: "Domů",
     definitions: "Terminologie",
+    openedTasks: "Otevřené úkoly",
   },
 };

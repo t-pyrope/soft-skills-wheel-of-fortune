@@ -1,5 +1,5 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from "expo-router";
 import {
   getFirestore,
   collection,
@@ -16,14 +16,15 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { i18n } from "@/i18n/config";
 import { app } from "@/firebaseConfig";
-import { Task } from "@/types/Task";
+import { ExtendedTask, Task } from "@/types/Task";
 import { DEFINITIONS } from "@/constants/softSkills";
+import { setSavedTasks } from "@/utils/setSavedTasks";
 
 const db = getFirestore(app);
 
 export default function YouWonModal() {
-  const [task, setTask] = useState<Task | null>(null);
-  const { prize } = useAppContext();
+  const [task, setTask] = useState<ExtendedTask | null>(null);
+  const { prize, setOpenedTasks, openedTasks } = useAppContext();
 
   useEffect(() => {
     const fetchRandomDoc = async () => {
@@ -31,24 +32,19 @@ export default function YouWonModal() {
 
       try {
         const querySnapshot = await getDocs(q);
-        const savedTasksJSON =
-          (await AsyncStorage.getItem("savedTasks")) ?? "[]";
-        const savedTasks = JSON.parse(savedTasksJSON);
+        const savedTaskIds = openedTasks.map((task) => task.id);
 
         const docs = querySnapshot.docs
           .map((doc) => ({ id: doc.id, ...doc.data() })) // Получаем массив документов
-          .filter((doc) => !savedTasks.includes(doc.id));
+          .filter((doc) => !savedTaskIds.includes(doc.id));
 
         if (docs.length === 0) {
           setTask(null);
         } else {
           const randomIndex = Math.floor(Math.random() * docs.length);
-          const newTask = docs[randomIndex] as Task;
-          const newSavedTasks = [...savedTasks, newTask.id];
-          await AsyncStorage.setItem(
-            "savedTasks",
-            JSON.stringify(newSavedTasks),
-          );
+          const newTask = { ...(docs[randomIndex] as Task), done: false };
+          const newSavedTasks = [...openedTasks, newTask];
+          await setSavedTasks(newSavedTasks, setOpenedTasks);
           setTask(newTask);
         }
       } catch (error) {
@@ -59,22 +55,47 @@ export default function YouWonModal() {
     fetchRandomDoc();
   }, [prize]);
 
+  const handleToggleDone = async () => {
+    if (!task) return;
+    const newOpenedTasks = [
+      ...openedTasks.filter((t) => t.id !== task.id),
+      { ...task, done: !task.done },
+    ];
+
+    await setSavedTasks(newOpenedTasks, setOpenedTasks);
+    setTask({ ...task, done: !task.done })
+  };
+
+  const handleClose = () => {
+    router.back()
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       {prize !== null ? (
         <ThemedText style={styles.prizeText}>
-          {i18n.t("wheel.youWon", { skill: DEFINITIONS[prize].title })}
+          {i18n.t("wheel.youWon", { skill: DEFINITIONS[prize - 1].title })}
         </ThemedText>
       ) : null}
-      <ThemedText type="subtitle">{task?.text?.ru}</ThemedText>
-      <ThemedText>Задание будет добавлено в ваш список заданий</ThemedText>
+      <ThemedText type="subtitle">{task?.text[i18n.locale as "en"]}</ThemedText>
+      <ThemedText>{i18n.t("wheel.taskWillBeAdded")}</ThemedText>
       <ThemedView style={styles.buttonsContainer}>
-        <TouchableOpacity style={[styles.button, styles.doneButton]}>
+        <TouchableOpacity
+          style={[styles.button, styles.doneButton]}
+          onPress={handleToggleDone}
+        >
           <Ionicons name="checkmark-circle" size={32} color="white" />
-          <ThemedText>Отметить как сделанное</ThemedText>
+          <ThemedText>
+            {task?.done
+              ? i18n.t("wheel.unmarkAsDone")
+              : i18n.t("wheel.markAsDone")}
+          </ThemedText>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.closeButton]}>
-          <ThemedText>Закрыть</ThemedText>
+        <TouchableOpacity
+          style={[styles.button, styles.closeButton]}
+          onPress={handleClose}
+        >
+          <ThemedText>{i18n.t("wheel.close")}</ThemedText>
         </TouchableOpacity>
       </ThemedView>
     </SafeAreaView>
@@ -113,6 +134,7 @@ const styles = StyleSheet.create({
   },
   doneButton: {
     backgroundColor: "#06cc2b",
+    gap: 10,
   },
   closeButton: {
     borderWidth: 2,
