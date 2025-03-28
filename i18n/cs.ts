@@ -60,10 +60,11 @@ export const cs = {
   },
   definitions: {
     title: "Terminologie",
+    source: "Zdroj",
   },
   openedTasks: {
     title: "Otevřené úkoly",
-    noTasks: "Zatím nejsou žádné otevřené úkoly"
+    noTasks: "Zatím nejsou žádné otevřené úkoly",
   },
   menu: {
     home: "Domů",

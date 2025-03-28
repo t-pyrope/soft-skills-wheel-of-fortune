@@ -60,6 +60,7 @@ export const en = {
   },
   definitions: {
     title: "Definitions",
+    source: "Source"
   },
   openedTasks: {
     title: "Opened tasks",

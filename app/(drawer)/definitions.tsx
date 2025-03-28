@@ -9,16 +9,23 @@ const Item = ({
   title,
   definition,
   index,
+  source,
 }: {
   title: string;
   definition: string;
   index: number;
+  source: string;
 }) => (
   <View style={styles.item}>
     <ThemedText type="subtitle" style={styles.subtitle}>
       {index}. {title}
     </ThemedText>
     <ThemedText>{definition}</ThemedText>
+    {source && (
+      <ThemedText style={styles.source}>
+        {i18n.t("definitions.source")}: {source}
+      </ThemedText>
+    )}
   </View>
 );
 
@@ -48,5 +55,9 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     marginBlockEnd: 8,
+  },
+  source: {
+    opacity: 0.8,
+    fontSize: 15,
   },
 });

@@ -60,6 +60,7 @@ export const ru = {
   },
   definitions: {
     title: "Определения",
+    source: "Источник"
   },
   openedTasks: {
     title: "Открытые задания",
