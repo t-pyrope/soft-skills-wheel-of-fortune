@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
+    marginBlockStart: 20,
   },
   wheelHolder: {
     position: "absolute",
@@ -156,14 +157,14 @@ const styles = StyleSheet.create({
   },
   wheel: {
     position: "absolute",
-    top: 20,
+    top: 40,
     height: 300,
     width: 300,
     alignItems: "center",
     justifyContent: "center",
   },
   button: {
-    marginBlockStart: 30,
+    marginBlockStart: 50,
     marginBlockEnd: 15,
     height: 56,
     paddingInline: 30,

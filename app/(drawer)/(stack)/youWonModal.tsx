@@ -18,7 +18,6 @@ import { i18n } from "@/i18n/config";
 import { app } from "@/firebaseConfig";
 import { ExtendedTask, Task } from "@/types/Task";
 import { DEFINITIONS } from "@/constants/softSkills";
-import { setSavedTasks } from "@/utils/setSavedTasks";
 
 const db = getFirestore(app);
 
@@ -44,7 +43,7 @@ export default function YouWonModal() {
           const randomIndex = Math.floor(Math.random() * docs.length);
           const newTask = { ...(docs[randomIndex] as Task), done: false };
           const newSavedTasks = [...openedTasks, newTask];
-          await setSavedTasks(newSavedTasks, setOpenedTasks);
+          await setOpenedTasks(newSavedTasks);
           setTask(newTask);
         }
       } catch (error) {
@@ -62,12 +61,12 @@ export default function YouWonModal() {
       { ...task, done: !task.done },
     ];
 
-    await setSavedTasks(newOpenedTasks, setOpenedTasks);
-    setTask({ ...task, done: !task.done })
+    await setOpenedTasks(newOpenedTasks);
+    setTask({ ...task, done: !task.done });
   };
 
   const handleClose = () => {
-    router.back()
+    router.back();
   };
 
   return (
@@ -133,11 +132,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   doneButton: {
-    backgroundColor: "#06cc2b",
+    backgroundColor: "#bfbbec",
     gap: 10,
   },
   closeButton: {
     borderWidth: 2,
-    borderColor: "#06cc2b",
+    borderColor: "#3e14b1",
   },
 });

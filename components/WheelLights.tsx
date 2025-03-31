@@ -5,28 +5,28 @@ import React from "react";
 export const WheelLights = () => {
   return (
     <>
-      <View style={[styles.light, { top: 2 }]}>
+      <View style={[styles.light, { top: 20 }]}>
         <Light />
       </View>
-      <View style={[styles.light, { top: 318 }]}>
+      <View style={[styles.light, { top: 338 }]}>
         <Light />
       </View>
-      <View style={[styles.light, { top: 52, left: 46 }]}>
+      <View style={[styles.light, { top: 72, left: 46 }]}>
         <Light />
       </View>
-      <View style={[styles.light, { top: 52, left: 276 }]}>
+      <View style={[styles.light, { top: 72, left: 276 }]}>
         <Light />
       </View>
-      <View style={[styles.light, { top: 160, left: 2 }]}>
+      <View style={[styles.light, { top: 180, left: 2 }]}>
         <Light />
       </View>
-      <View style={[styles.light, { top: 160, left: 318 }]}>
+      <View style={[styles.light, { top: 180, left: 318 }]}>
         <Light />
       </View>
-      <View style={[styles.light, { top: 260, left: 40 }]}>
+      <View style={[styles.light, { top: 280, left: 40 }]}>
         <Light />
       </View>
-      <View style={[styles.light, { top: 260, left: 280 }]}>
+      <View style={[styles.light, { top: 280, left: 280 }]}>
         <Light />
       </View>
     </>

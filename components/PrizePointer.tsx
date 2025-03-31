@@ -41,7 +41,7 @@ export const PrizePointer = () => {
 const styles = StyleSheet.create({
   wheelPointer: {
     position: "absolute",
-    top: 20,
+    top: 40,
     height: 300,
     width: 300,
     alignItems: "center",
