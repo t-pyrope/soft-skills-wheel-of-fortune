@@ -64,7 +64,12 @@ export const en = {
   },
   openedTasks: {
     title: "Opened tasks",
-    noTasks: "There is no open tasks yet"
+    noTasks: "There is no open tasks yet",
+    task: {
+      category: "Category",
+      done: 'Done',
+      notDone: 'Mark as done'
+    },
   },
   menu: {
     home: "Home",

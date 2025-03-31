@@ -1,29 +1,22 @@
+import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Header } from "@/components/Header";
 import { i18n } from "@/i18n/config";
-import { useEffect, useState } from "react";
 import { getSavedTaskIds } from "@/utils/getSavedTaskIds";
 import { ThemedText } from "@/components/ThemedText";
-import { ExtendedTask } from "@/types/Task";
-import { ThemedView } from "@/components/ThemedView";
-
-const OpenedTask = ({ task }: { task: ExtendedTask }) => {
-  return (
-    <ThemedView style={styles.taskItem}>
-      <ThemedText>{task.text[i18n.locale as "en"]}</ThemedText>
-    </ThemedView>
-  );
-};
+import { OpenedTask } from "@/components/OpenedTask";
+import { useAppContext } from "@/contexts/AppContext";
 
 export default function OpenedTasks() {
-  const [openedTasks, setOpenedTasks] = useState<Array<ExtendedTask>>([]);
+  const { openedTasks, setOpenedTasks } = useAppContext();
   const [loadingState, setLoadingState] = useState<"loading" | "loaded">(
     "loading",
   );
 
   useEffect(() => {
+    if (openedTasks.length) return;
     const getTasks = async () => {
       try {
         const savedTasks = await getSavedTaskIds();
@@ -37,7 +30,7 @@ export default function OpenedTasks() {
     };
 
     getTasks();
-  }, []);
+  }, [openedTasks.length]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -58,8 +51,5 @@ const styles = StyleSheet.create({
     position: "static",
     padding: 20,
     paddingBottom: 40,
-  },
-  taskItem: {
-    padding: 10,
   },
 });

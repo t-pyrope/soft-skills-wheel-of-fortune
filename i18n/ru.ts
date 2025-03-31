@@ -64,7 +64,12 @@ export const ru = {
   },
   openedTasks: {
     title: "Открытые задания",
-    noTasks: "Нет открытых заданий"
+    noTasks: "Нет открытых заданий",
+    task: {
+      category: "Категория",
+      done: 'Сделано',
+      notDone: 'Отметить как сделанное'
+    },
   },
   menu: {
     home: "Домой",

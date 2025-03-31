@@ -65,6 +65,11 @@ export const cs = {
   openedTasks: {
     title: "Otevřené úkoly",
     noTasks: "Zatím nejsou žádné otevřené úkoly",
+    task: {
+      category: "Kategorie",
+      done: 'Hotovo',
+      notDone: 'Označit jako hotové'
+    },
   },
   menu: {
     home: "Domů",
