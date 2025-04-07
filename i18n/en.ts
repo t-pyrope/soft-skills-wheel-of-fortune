@@ -80,6 +80,7 @@ export const en = {
   },
   menu: {
     home: "Home",
+    youWon: "You won",
     definitions: "Definitions",
     openedTasks: "Opened tasks",
   },

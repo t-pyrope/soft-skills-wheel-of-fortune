@@ -15,7 +15,7 @@ export default function Layout() {
       <Stack.Screen
         name="youWonModal"
         options={{
-          title: "You won modal",
+          title: i18n.t("menu.youWon"),
           presentation: "modal",
         }}
       />

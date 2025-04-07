@@ -80,6 +80,7 @@ export const ru = {
   },
   menu: {
     home: "Домой",
+    youWon: "Вы выиграли",
     definitions: "Определения",
     openedTasks: "Открытые задания",
   },

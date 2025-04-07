@@ -80,6 +80,7 @@ export const cs = {
   },
   menu: {
     home: "Domů",
+    youWon: "Vyhrál(a) jste",
     definitions: "Terminologie",
     openedTasks: "Otevřené úkoly",
   },
