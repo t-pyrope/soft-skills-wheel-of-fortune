@@ -9,10 +9,16 @@ import { ThemedText } from "@/components/ThemedText";
 import { OpenedTask } from "@/components/OpenedTask";
 import { useAppContext } from "@/contexts/AppContext";
 import { RadioGroup } from "@/components/ui/RadioGroup";
+import { Filters } from "@/types/Filters";
+import {
+  DEFAULT_SAVED_FILTERS,
+  getSavedFilters,
+} from "@/utils/getSavedFilters";
+import { setSavedFilters } from "@/utils/setSavedFilters";
 
 export default function OpenedTasks() {
   const { openedTasks, setOpenedTasks } = useAppContext();
-  const [doneFilter, setDoneFilter] = useState("all");
+  const [filters, setFilters] = useState<Filters>(DEFAULT_SAVED_FILTERS);
   const [loadingState, setLoadingState] = useState<"loading" | "loaded">(
     "loading",
   );
@@ -34,10 +40,25 @@ export default function OpenedTasks() {
     getTasks();
   }, [openedTasks.length]);
 
+  useEffect(() => {
+    getSavedFilters().then((tempFilters) => setFilters(tempFilters));
+  }, []);
+
+  const saveDoneFilters = (newDoneFilter: string) => {
+    const newFilters = {
+      ...filters,
+      doneFilter: newDoneFilter as Filters["doneFilter"],
+    };
+    setFilters(newFilters);
+    setSavedFilters(newFilters);
+  };
+
   const filteredTasks =
-    doneFilter === "all"
+    filters.doneFilter === "all"
       ? openedTasks
-      : openedTasks.filter((task) => task.done === (doneFilter === "done"));
+      : openedTasks.filter(
+          (task) => task.done === (filters.doneFilter === "done"),
+        );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -48,8 +69,8 @@ export default function OpenedTasks() {
           { value: "done", label: i18n.t("openedTasks.doneFilter.done") },
           { value: "undone", label: i18n.t("openedTasks.doneFilter.undone") },
         ]}
-        selectedValue={doneFilter}
-        onSelect={setDoneFilter}
+        selectedValue={filters.doneFilter}
+        onSelect={saveDoneFilters}
         label={i18n.t("openedTasks.doneFilter.label")}
       />
       {loadingState === "loaded" && openedTasks.length === 0 && (
