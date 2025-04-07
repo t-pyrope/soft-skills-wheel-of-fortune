@@ -24,7 +24,8 @@ const db = getFirestore(app);
 
 export default function YouWonModal() {
   const [taskId, setTaskId] = useState<string | null>(null);
-  const { prize, setOpenedTasks, openedTasks } = useAppContext();
+  const [isLoading, setIsLoading] = useState(true);
+  const { prize, setOpenedTasks, openedTasks, setPrize } = useAppContext();
   const task = openedTasks.find((task) => task.id === taskId);
 
   useEffect(() => {
@@ -55,11 +56,21 @@ export default function YouWonModal() {
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchRandomDoc();
   }, [prize]);
+
+  useEffect(() => {
+    return () => {
+      setIsLoading(true);
+      setTaskId(null);
+      setPrize(null);
+    };
+  }, []);
 
   const handleToggleDone = async () => {
     if (!task) return;
@@ -85,6 +96,29 @@ export default function YouWonModal() {
   const handleClose = () => {
     router.back();
   };
+
+  if (isLoading) {
+    return <SafeAreaView style={styles.container}></SafeAreaView>;
+  }
+
+  if (!isLoading && taskId === null && prize) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <ThemedText>
+          {i18n.t("wheel.noTask.noMoreTasks", {
+            skill: DEFINITIONS[prize - 1].title,
+          })}
+        </ThemedText>
+        <ThemedText>{i18n.t("wheel.noTask.tryLater")}</ThemedText>
+        <TouchableOpacity
+          style={[styles.button, styles.closeButton]}
+          onPress={handleClose}
+        >
+          <ThemedText>{i18n.t("wheel.close")}</ThemedText>
+        </TouchableOpacity>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>

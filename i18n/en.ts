@@ -57,10 +57,14 @@ export const en = {
     unmarkAsDone: "Remove from done",
     markAsDone: "Mark as done",
     close: "Close",
+    noTask: {
+      noMoreTasks: 'There is no more tasks for the "%{skill}" skill right now',
+      tryLater: "Please, try again later",
+    },
   },
   definitions: {
     title: "Definitions",
-    source: "Source"
+    source: "Source",
   },
   openedTasks: {
     title: "Opened tasks",
@@ -68,8 +72,8 @@ export const en = {
     task: {
       category: "Category",
       opened: "Opened on",
-      done: 'Done',
-      notDone: 'Mark as done'
+      done: "Done",
+      notDone: "Mark as done",
     },
     doneFilter: {
       label: "Show tasks",

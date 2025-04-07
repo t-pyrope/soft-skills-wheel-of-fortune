@@ -57,10 +57,14 @@ export const ru = {
     unmarkAsDone: "Убрать из сделанных",
     markAsDone: "Отметить как сделанное",
     close: "Закрыть",
+    noTask: {
+      noMoreTasks: 'На данный момент к навыку "%{skill}" больше нет заданий',
+      tryLater: "Пожалуйста, попробуйте снова позже",
+    },
   },
   definitions: {
     title: "Определения",
-    source: "Источник"
+    source: "Источник",
   },
   openedTasks: {
     title: "Открытые задания",
@@ -68,8 +72,8 @@ export const ru = {
     task: {
       category: "Категория",
       opened: "Дата открытия",
-      done: 'Сделано',
-      notDone: 'Отметить как сделанное'
+      done: "Сделано",
+      notDone: "Отметить как сделанное",
     },
     doneFilter: {
       label: "Показать",

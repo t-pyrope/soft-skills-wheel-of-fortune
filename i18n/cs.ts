@@ -57,6 +57,10 @@ export const cs = {
     unmarkAsDone: "Označit jako undone",
     markAsDone: "Označit jako done",
     close: "Zavřít",
+    noTask: {
+      noMoreTasks: 'V této chvíli nejsou žádné tasky k dovednosti "%{skill}"',
+      tryLater: "Zkuste prosím později",
+    },
   },
   definitions: {
     title: "Terminologie",
