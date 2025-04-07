@@ -70,6 +70,12 @@ export const ru = {
       done: 'Сделано',
       notDone: 'Отметить как сделанное'
     },
+    doneFilter: {
+      label: "Показать",
+      all: "Все",
+      done: "Сделанные",
+      undone: "Остальные",
+    },
   },
   menu: {
     home: "Домой",

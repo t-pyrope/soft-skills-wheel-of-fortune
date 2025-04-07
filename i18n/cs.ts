@@ -67,8 +67,14 @@ export const cs = {
     noTasks: "Zatím nejsou žádné otevřené úkoly",
     task: {
       category: "Kategorie",
-      done: 'Hotovo',
-      notDone: 'Označit jako hotové'
+      done: "Hotovo",
+      notDone: "Označit jako hotové",
+    },
+    doneFilter: {
+      label: "Zobrazit úkoly",
+      all: "Všechny",
+      done: "Hotové",
+      undone: "Ostatní",
     },
   },
   menu: {

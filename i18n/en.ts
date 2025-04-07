@@ -70,6 +70,12 @@ export const en = {
       done: 'Done',
       notDone: 'Mark as done'
     },
+    doneFilter: {
+      label: "Show tasks",
+      all: "All",
+      done: "Done",
+      undone: "Undone",
+    },
   },
   menu: {
     home: "Home",
