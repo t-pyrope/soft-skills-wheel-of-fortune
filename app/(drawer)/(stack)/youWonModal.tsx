@@ -14,16 +14,18 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppContext } from "@/contexts/AppContext";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { StarRating } from "@/components/Rating";
 import { i18n } from "@/i18n/config";
 import { app } from "@/firebaseConfig";
-import { ExtendedTask, Task } from "@/types/Task";
+import { Task } from "@/types/Task";
 import { DEFINITIONS } from "@/constants/softSkills";
 
 const db = getFirestore(app);
 
 export default function YouWonModal() {
-  const [task, setTask] = useState<ExtendedTask | null>(null);
+  const [taskId, setTaskId] = useState<string | null>(null);
   const { prize, setOpenedTasks, openedTasks } = useAppContext();
+  const task = openedTasks.find((task) => task.id === taskId);
 
   useEffect(() => {
     const fetchRandomDoc = async () => {
@@ -38,13 +40,17 @@ export default function YouWonModal() {
           .filter((doc) => !savedTaskIds.includes(doc.id));
 
         if (docs.length === 0) {
-          setTask(null);
+          setTaskId(null);
         } else {
           const randomIndex = Math.floor(Math.random() * docs.length);
-          const newTask = { ...(docs[randomIndex] as Task), done: false };
+          const newTask = {
+            ...(docs[randomIndex] as Task),
+            done: false,
+            rating: 0,
+          };
           const newSavedTasks = [...openedTasks, newTask];
           await setOpenedTasks(newSavedTasks);
-          setTask(newTask);
+          setTaskId(newTask.id);
         }
       } catch (error) {
         console.error(error);
@@ -62,7 +68,17 @@ export default function YouWonModal() {
     ];
 
     await setOpenedTasks(newOpenedTasks);
-    setTask({ ...task, done: !task.done });
+  };
+
+  const handleSetRating = async (newRating: number) => {
+    if (!task) return;
+
+    const newOpenedTasks = [
+      ...openedTasks.filter((t) => t.id !== task.id),
+      { ...task, rating: newRating },
+    ];
+
+    await setOpenedTasks(newOpenedTasks);
   };
 
   const handleClose = () => {
@@ -78,6 +94,7 @@ export default function YouWonModal() {
       ) : null}
       <ThemedText type="subtitle">{task?.text[i18n.locale as "en"]}</ThemedText>
       <ThemedText>{i18n.t("wheel.taskWillBeAdded")}</ThemedText>
+      <StarRating rating={task?.rating ?? 0} setRating={handleSetRating} />
       <ThemedView style={styles.buttonsContainer}>
         <TouchableOpacity
           style={[styles.button, styles.doneButton]}

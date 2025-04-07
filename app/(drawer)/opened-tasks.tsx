@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Header } from "@/components/Header";
 import { i18n } from "@/i18n/config";
-import { getSavedTaskIds } from "@/utils/getSavedTaskIds";
+import { getSavedTasks } from "@/utils/getSavedTasks";
 import { ThemedText } from "@/components/ThemedText";
 import { OpenedTask } from "@/components/OpenedTask";
 import { useAppContext } from "@/contexts/AppContext";
@@ -21,9 +21,9 @@ export default function OpenedTasks() {
     if (openedTasks.length) return;
     const getTasks = async () => {
       try {
-        const savedTasks = await getSavedTaskIds();
+        const savedTasks = await getSavedTasks();
 
-        setOpenedTasks(savedTasks);
+        await setOpenedTasks(savedTasks);
       } catch (e) {
         console.error(e);
       } finally {

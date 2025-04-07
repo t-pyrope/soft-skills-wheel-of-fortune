@@ -5,6 +5,7 @@ import { ViewStyle } from "react-native/Libraries/StyleSheet/StyleSheetTypes";
 import { ExtendedTask } from "@/types/Task";
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
+import { StarRating } from "@/components/Rating";
 import { DEFINITIONS } from "@/constants/softSkills";
 import { useAppContext } from "@/contexts/AppContext";
 import { i18n } from "@/i18n/config";
@@ -16,12 +17,20 @@ export const OpenedTask = ({ task }: { task: ExtendedTask }) => {
     (definition) => definition.index === task.parentId,
   )?.title;
 
-  const handleChipPress = () => {
+  const handleChipPress = async () => {
     const updatedTasks = openedTasks.map((openedTask) =>
       openedTask.id === task.id ? { ...task, done: !task.done } : openedTask,
     );
 
-    setOpenedTasks(updatedTasks);
+    await setOpenedTasks(updatedTasks);
+  };
+
+  const handleSetRating = async (newRating: number) => {
+    const updatedTasks = openedTasks.map((openedTask) =>
+      openedTask.id === task.id ? { ...task, rating: newRating } : openedTask,
+    );
+
+    await setOpenedTasks(updatedTasks);
   };
 
   const chipStyles: StyleProp<ViewStyle> = [styles.doneChip];
@@ -41,6 +50,10 @@ export const OpenedTask = ({ task }: { task: ExtendedTask }) => {
           <ThemedText>{softSkillTitle}</ThemedText>
         </ThemedView>
       )}
+      <ThemedView style={[styles.text, { marginBlock: 6 }]}>
+        <ThemedText type="defaultSemiBold">My rating:</ThemedText>
+        <StarRating rating={task.rating} setRating={handleSetRating} />
+      </ThemedView>
       <ThemedView style={chipStyles}>
         <TouchableOpacity onPress={handleChipPress}>
           <ThemedText>
@@ -60,7 +73,8 @@ const styles = StyleSheet.create({
   },
   text: {
     flexDirection: "row",
-    gap: "1ch",
+    gap: 3,
+    alignItems: "center",
   },
   doneChip: {
     borderRadius: 20,

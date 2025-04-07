@@ -9,7 +9,7 @@ import {
 } from "react";
 
 import { ExtendedTask } from "@/types/Task";
-import { getSavedTaskIds } from "@/utils/getSavedTaskIds";
+import { getSavedTasks } from "@/utils/getSavedTasks";
 import { setSavedTasks } from "@/utils/setSavedTasks";
 
 interface ContextProps {
@@ -33,7 +33,9 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [openedTasks, setOpenedTasks] = useState<Array<ExtendedTask>>([]);
 
   useEffect(() => {
-    getSavedTaskIds().then((tasks) => setOpenedTasks(tasks));
+    getSavedTasks().then((tasks) => {
+      setOpenedTasks(tasks)
+    });
   }, []);
 
   const handleSetOpenedTasks = async (tasks: ExtendedTask[]) => {
