@@ -11,4 +11,5 @@ export interface Task {
 export interface ExtendedTask extends Task {
   done: boolean;
   rating: number;
+  addedOn: number;
 }

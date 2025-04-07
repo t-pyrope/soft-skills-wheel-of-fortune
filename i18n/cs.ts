@@ -67,6 +67,7 @@ export const cs = {
     noTasks: "Zatím nejsou žádné otevřené úkoly",
     task: {
       category: "Kategorie",
+      opened: "Datum otevření",
       done: "Hotovo",
       notDone: "Označit jako hotové",
     },

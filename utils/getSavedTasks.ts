@@ -8,6 +8,7 @@ export const getSavedTasks = async (): Promise<Array<ExtendedTask>> => {
     return (JSON.parse(savedTasksJSON) as ExtendedTask[]).map((task) => ({
       ...task,
       rating: task.rating ?? 0,
+      addedOn: task.addedOn ? task.addedOn : Date.now(),
     }));
   } catch (e) {
     console.error(e);

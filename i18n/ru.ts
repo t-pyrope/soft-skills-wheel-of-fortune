@@ -67,6 +67,7 @@ export const ru = {
     noTasks: "Нет открытых заданий",
     task: {
       category: "Категория",
+      opened: "Дата открытия",
       done: 'Сделано',
       notDone: 'Отметить как сделанное'
     },

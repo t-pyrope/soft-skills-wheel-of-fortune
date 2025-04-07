@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { StyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
 import { ViewStyle } from "react-native/Libraries/StyleSheet/StyleSheetTypes";
@@ -42,6 +43,7 @@ export const OpenedTask = ({ task }: { task: ExtendedTask }) => {
   return (
     <ThemedView style={styles.taskItem}>
       <ThemedText>{task.text[i18n.locale as "en"]}</ThemedText>
+
       {softSkillTitle && (
         <ThemedView style={styles.text}>
           <ThemedText type="defaultSemiBold">
@@ -50,10 +52,19 @@ export const OpenedTask = ({ task }: { task: ExtendedTask }) => {
           <ThemedText>{softSkillTitle}</ThemedText>
         </ThemedView>
       )}
+
+      <ThemedView style={styles.text}>
+        <ThemedText type="defaultSemiBold">
+          {i18n.t("openedTasks.task.opened")}:
+        </ThemedText>
+        <ThemedText>{dayjs(task.addedOn).format("MMMM D, YYYY")}</ThemedText>
+      </ThemedView>
+
       <ThemedView style={[styles.text, { marginBlock: 6 }]}>
         <ThemedText type="defaultSemiBold">My rating:</ThemedText>
         <StarRating rating={task.rating} setRating={handleSetRating} />
       </ThemedView>
+
       <ThemedView style={chipStyles}>
         <TouchableOpacity onPress={handleChipPress}>
           <ThemedText>

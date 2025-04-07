@@ -67,6 +67,7 @@ export const en = {
     noTasks: "There is no open tasks yet",
     task: {
       category: "Category",
+      opened: "Opened on",
       done: 'Done',
       notDone: 'Mark as done'
     },

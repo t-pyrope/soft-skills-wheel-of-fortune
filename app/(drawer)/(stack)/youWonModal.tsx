@@ -47,6 +47,7 @@ export default function YouWonModal() {
             ...(docs[randomIndex] as Task),
             done: false,
             rating: 0,
+            addedOn: Date.now(),
           };
           const newSavedTasks = [...openedTasks, newTask];
           await setOpenedTasks(newSavedTasks);
