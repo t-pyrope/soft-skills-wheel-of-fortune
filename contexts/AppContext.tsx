@@ -11,12 +11,15 @@ import {
 import { ExtendedTask } from "@/types/Task";
 import { getSavedTasks } from "@/utils/getSavedTasks";
 import { setSavedTasks } from "@/utils/setSavedTasks";
+import { getTasksLimit } from "@/utils/getTasksLimit";
+import { setTasksLimit } from "@/utils/setTasksLimit";
 
 interface ContextProps {
   prize: number | null;
   setPrize: Dispatch<SetStateAction<number | null>>;
   openedTasks: ExtendedTask[];
   setOpenedTasks: (tasks: ExtendedTask[]) => Promise<void>;
+  decreaseLimit: () => void;
 }
 
 const initialState: ContextProps = {
@@ -24,6 +27,7 @@ const initialState: ContextProps = {
   setPrize: () => false,
   openedTasks: [],
   setOpenedTasks: async () => undefined,
+  decreaseLimit: () => undefined,
 };
 
 export const AppContext = createContext<ContextProps>(initialState);
@@ -31,16 +35,30 @@ export const AppContext = createContext<ContextProps>(initialState);
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [prize, setPrize] = useState<number | null>(null);
   const [openedTasks, setOpenedTasks] = useState<Array<ExtendedTask>>([]);
+  const [limit, setLimit] = useState(0);
 
   useEffect(() => {
     getSavedTasks().then((tasks) => {
-      setOpenedTasks(tasks)
+      setOpenedTasks(tasks);
     });
+
+    getTasksLimit().then((newLimit) => setLimit(newLimit));
   }, []);
 
   const handleSetOpenedTasks = async (tasks: ExtendedTask[]) => {
     setOpenedTasks(tasks);
     await setSavedTasks(tasks);
+  };
+
+  const handleDecreaseLimit = async () => {
+    if (limit === 0) {
+      return;
+    }
+
+    const newLimit = limit - 1;
+
+    setLimit(newLimit);
+    await setTasksLimit(newLimit);
   };
 
   return (
@@ -50,6 +68,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         setPrize,
         openedTasks,
         setOpenedTasks: handleSetOpenedTasks,
+        decreaseLimit: handleDecreaseLimit,
       }}
     >
       {children}
