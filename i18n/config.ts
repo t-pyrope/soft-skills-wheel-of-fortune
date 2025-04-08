@@ -4,11 +4,6 @@ import { en } from "@/i18n/en";
 import { cs } from "@/i18n/cs";
 import { ru } from "@/i18n/ru";
 
-import "dayjs/locale/en";
-import "dayjs/locale/ru";
-import "dayjs/locale/cs";
-import dayjs from "dayjs";
-
 // Set the key-value pairs for the different languages you want to support.
 const translations = {
   en,
@@ -24,7 +19,5 @@ i18n.locale = locale && ["en", "cs", "ru"].includes(locale) ? locale : "en";
 
 // When a value is missing from a language it'll fall back to another language with the key present.
 i18n.enableFallback = true;
-
-dayjs.locale(i18n.locale);
 
 export { i18n };

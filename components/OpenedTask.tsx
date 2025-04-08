@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { StyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
 import { ViewStyle } from "react-native/Libraries/StyleSheet/StyleSheetTypes";
@@ -57,11 +56,15 @@ export const OpenedTask = ({ task }: { task: ExtendedTask }) => {
         <ThemedText type="defaultSemiBold">
           {i18n.t("openedTasks.task.opened")}:
         </ThemedText>
-        <ThemedText>{dayjs(task.addedOn).format("MMMM D, YYYY")}</ThemedText>
+        <ThemedText>
+          {i18n.strftime(new Date(task.addedOn), "%B %d, %Y")}
+        </ThemedText>
       </ThemedView>
 
       <ThemedView style={[styles.text, { marginBlock: 6 }]}>
-        <ThemedText type="defaultSemiBold">My rating:</ThemedText>
+        <ThemedText type="defaultSemiBold">
+          {i18n.t("openedTasks.task.myRating")}:
+        </ThemedText>
         <StarRating rating={task.rating} setRating={handleSetRating} />
       </ThemedView>
 

@@ -72,6 +72,7 @@ export const en = {
     task: {
       category: "Category",
       opened: "Opened on",
+      myRating: "My rating",
       done: "Done",
       notDone: "Mark as done",
     },
@@ -87,5 +88,22 @@ export const en = {
     youWon: "You won",
     definitions: "Definitions",
     openedTasks: "Opened tasks",
+  },
+  date: {
+    month_names: [
+      null,
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
   },
 };

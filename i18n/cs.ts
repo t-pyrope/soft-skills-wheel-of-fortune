@@ -72,6 +72,7 @@ export const cs = {
     task: {
       category: "Kategorie",
       opened: "Datum otevření",
+      myRating: "Moje hodnocení",
       done: "Hotovo",
       notDone: "Označit jako hotové",
     },
@@ -87,5 +88,22 @@ export const cs = {
     youWon: "Vyhrál(a) jste",
     definitions: "Terminologie",
     openedTasks: "Otevřené úkoly",
+  },
+  date: {
+    month_names: [
+      null,
+      "Leden",
+      "Únor",
+      "Březen",
+      "Duben",
+      "Květen",
+      "Červen",
+      "Červenec",
+      "Srpen",
+      "Září",
+      "Říjen",
+      "Listopad",
+      "Prosinec",
+    ],
   },
 };
