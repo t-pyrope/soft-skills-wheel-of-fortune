@@ -83,7 +83,9 @@ export const OpenedTask = ({ task }: { task: ExtendedTask }) => {
 
 const styles = StyleSheet.create({
   taskItem: {
-    padding: 10,
+    padding: 14,
+    marginBottom: 10,
+    borderRadius: 10,
   },
   text: {
     flexDirection: "row",

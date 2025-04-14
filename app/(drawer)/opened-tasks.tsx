@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Header } from "@/components/Header";
@@ -55,7 +55,7 @@ export default function OpenedTasks() {
 
   const filteredTasks =
     filters.doneFilter === "all"
-      ? openedTasks
+      ? openedTasks.slice().sort((a, b) => (a.done ? 1 : 1))
       : openedTasks.filter(
           (task) => task.done === (filters.doneFilter === "done"),
         );
@@ -76,9 +76,13 @@ export default function OpenedTasks() {
       {loadingState === "loaded" && openedTasks.length === 0 && (
         <ThemedText>{i18n.t("openedTasks.noTasks")}</ThemedText>
       )}
-      {filteredTasks.map((task) => (
-        <OpenedTask task={task} key={task.id} />
-      ))}
+      <View>
+        <FlatList
+          data={filteredTasks}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <OpenedTask task={item} />}
+        />
+      </View>
     </SafeAreaView>
   );
 }

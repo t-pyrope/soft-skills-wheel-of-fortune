@@ -1,6 +1,7 @@
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import { i18n } from "@/i18n/config";
+import { Platform } from "react-native";
 
 export default function Layout() {
   return (
@@ -19,6 +20,13 @@ export default function Layout() {
           options={{
             title: i18n.t("menu.definitions"),
             headerShown: false,
+            sceneStyle:
+              Platform.OS === "web"
+                ? {
+                    flexGrow: 1,
+                    overflow: "scroll",
+                  }
+                : {},
           }}
         />
         <Drawer.Screen
@@ -26,6 +34,13 @@ export default function Layout() {
           options={{
             title: i18n.t("menu.openedTasks"),
             headerShown: false,
+            sceneStyle:
+              Platform.OS === "web"
+                ? {
+                    flexGrow: 1,
+                    overflow: "scroll",
+                  }
+                : {},
           }}
         />
       </Drawer>
