@@ -18,13 +18,12 @@ import { i18n } from "@/i18n/config";
 import { PrizePointer } from "@/components/PrizePointer";
 import { useAppContext } from "@/contexts/AppContext";
 
-const segmentAngle = 360 / DEFINITIONS.length; // Calculate angle for each segment
+const segmentAngle = 360 / DEFINITIONS.length;
 
 const WheelOfFortune = () => {
   const [isSpinning, setIsSpinning] = useState(false);
-  const { setPrize } = useAppContext();
+  const { limit, setPrize } = useAppContext();
 
-  // Shared value to track the rotation state
   const rotation = useSharedValue(0);
 
   const spinWheel = () => {
@@ -35,8 +34,7 @@ const WheelOfFortune = () => {
     const extraAngle =
       Math.floor(Math.random() * DEFINITIONS.length) * segmentAngle;
 
-    // Determine which prize to stop at
-    const finalAngle = 2 * 360 + extraAngle; // Total spin (5 rounds + random angle)
+    const finalAngle = 2 * 360 + extraAngle;
 
     const selectedSegmentIndex = Math.floor(
       ((360 - extraAngle) / segmentAngle) % DEFINITIONS.length,
@@ -53,19 +51,15 @@ const WheelOfFortune = () => {
       () => {
         runOnJS(setIsSpinning)(false);
         runOnJS(setPrize)(selectedSegmentIndex + 1);
-        // Reset rotation to within [0, 360] degrees after spinning
         rotation.value = rotation.value % 360;
         runOnJS(router.push)("/youWonModal");
       },
     );
   };
 
-  // Animate the wheel's rotation using `useAnimatedStyle`
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        { rotate: `${rotation.value}deg` }, // Apply dynamic rotation
-      ],
+      transform: [{ rotate: `${rotation.value}deg` }],
     };
   });
 
@@ -78,8 +72,8 @@ const WheelOfFortune = () => {
         <Svg height="300" width="300" viewBox="0 0 100 100">
           <G rotation="0" origin="50, 50">
             {DEFINITIONS.map(({ emoji, title }, index) => {
-              const startAngle = index * segmentAngle; // Segment start angle
-              const endAngle = (index + 1) * segmentAngle; // Segment end angle
+              const startAngle = index * segmentAngle;
+              const endAngle = (index + 1) * segmentAngle;
               const largeArcFlag = endAngle - startAngle > 180 ? 1 : 0;
 
               const pathData = `
@@ -103,7 +97,7 @@ const WheelOfFortune = () => {
                 <React.Fragment key={title}>
                   <Path
                     d={pathData}
-                    fill={color} // Alternating colors
+                    fill={color}
                     stroke="#FFFFFF"
                     strokeWidth="0.5"
                     id={`part-${index}`}
@@ -130,7 +124,11 @@ const WheelOfFortune = () => {
 
       <View style={styles.innerShadow} />
       <WheelLights />
-      <TouchableOpacity onPress={spinWheel} style={styles.button}>
+      <TouchableOpacity
+        onPress={spinWheel}
+        style={[styles.button, limit === 0 ? styles.disabledButton : undefined]}
+        disabled={limit === 0}
+      >
         <ThemedText style={styles.buttonText} type="subtitle">
           {i18n.t("wheel.spin")}
         </ThemedText>
@@ -172,6 +170,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15,
+  },
+  disabledButton: {
+    opacity: 0.7,
   },
   buttonText: {
     color: "#303030",

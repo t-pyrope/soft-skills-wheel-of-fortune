@@ -1,16 +1,20 @@
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import WheelOfFortune from "@/components/WheelOfFortune";
 import { Header } from "@/components/Header";
+import { ThemedText } from "@/components/ThemedText";
+import WheelOfFortune from "@/components/WheelOfFortune";
 import { i18n } from "@/i18n/config";
-import { app } from "@/firebaseConfig";
+import { useAppContext } from "@/contexts/AppContext";
 
 export default function HomeScreen() {
+  const { limit } = useAppContext();
+
   return (
     <SafeAreaView style={styles.container}>
       <Header title={i18n.t("wheel.title")} />
       <WheelOfFortune />
+      <ThemedText>{i18n.t("wheel.spinsLeft", { limit })}</ThemedText>
     </SafeAreaView>
   );
 }

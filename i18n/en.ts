@@ -51,6 +51,7 @@ export const en = {
   },
   wheel: {
     title: "Wheel of fortune",
+    spinsLeft: "Spins left for today: %{limit}",
     youWon: "🎉 You Won: %{skill}",
     spin: "Spin the wheel of fortune!",
     taskWillBeAdded: "Task will be added to opened tasks",

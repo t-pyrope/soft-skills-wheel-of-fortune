@@ -51,6 +51,7 @@ export const cs = {
   },
   wheel: {
     title: "Kolo štěstí",
+    spinsLeft: "Na dnešek zbývá spinů: %{limit}",
     youWon: "🎉 Vyhrál(a) jste: %{skill}",
     spin: "Roztočit kolo štěstí!",
     taskWillBeAdded: "Úkol bude přidán do sekce otevřených úkolů",

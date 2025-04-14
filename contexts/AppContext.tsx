@@ -19,6 +19,7 @@ interface ContextProps {
   setPrize: Dispatch<SetStateAction<number | null>>;
   openedTasks: ExtendedTask[];
   setOpenedTasks: (tasks: ExtendedTask[]) => Promise<void>;
+  limit: number;
   decreaseLimit: () => void;
 }
 
@@ -27,6 +28,7 @@ const initialState: ContextProps = {
   setPrize: () => false,
   openedTasks: [],
   setOpenedTasks: async () => undefined,
+  limit: 5,
   decreaseLimit: () => undefined,
 };
 
@@ -64,6 +66,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AppContext.Provider
       value={{
+        limit,
         prize,
         setPrize,
         openedTasks,

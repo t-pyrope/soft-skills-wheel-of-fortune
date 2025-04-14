@@ -25,7 +25,7 @@ const db = getFirestore(app);
 export default function YouWonModal() {
   const [taskId, setTaskId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { prize, setOpenedTasks, openedTasks, setPrize } = useAppContext();
+  const { prize, setOpenedTasks, openedTasks, setPrize, decreaseLimit, limit } = useAppContext();
   const task = openedTasks.find((task) => task.id === taskId);
 
   useEffect(() => {
@@ -53,6 +53,7 @@ export default function YouWonModal() {
           const newSavedTasks = [...openedTasks, newTask];
           await setOpenedTasks(newSavedTasks);
           setTaskId(newTask.id);
+          decreaseLimit();
         }
       } catch (error) {
         console.error(error);
