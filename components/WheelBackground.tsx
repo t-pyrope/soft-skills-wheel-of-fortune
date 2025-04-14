@@ -14,8 +14,8 @@ export const WheelBackground = () => {
         </Defs>
         <Circle
           stroke={`url(#gradient)`}
-          strokeWidth={20}
-          r={155}
+          strokeWidth={30}
+          r={150}
           fill="none"
           cx={170}
           cy={170}

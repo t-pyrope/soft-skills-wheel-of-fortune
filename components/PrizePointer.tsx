@@ -13,8 +13,8 @@ export const PrizePointer = () => {
       >
         <Defs>
           <RadialGradient id="prizePointerGradient">
-            <Stop offset="0" stopColor={`#fff587`} />
-            <Stop offset="1" stopColor={`#ffcf87`} />
+            <Stop offset="0" stopColor={`#fbf6cb`} />
+            <Stop offset="1" stopColor={`#fad9a8`} />
           </RadialGradient>
         </Defs>
         <G rotation="0" origin="50, 50">

@@ -69,7 +69,7 @@ const WheelOfFortune = () => {
         <WheelBackground />
       </View>
       <Animated.View style={[styles.wheel, animatedStyle]}>
-        <Svg height="300" width="300" viewBox="0 0 100 100">
+        <Svg height="290" width="290" viewBox="0 0 100 100">
           <G rotation="0" origin="50, 50">
             {DEFINITIONS.map(({ emoji, title }, index) => {
               const startAngle = index * segmentAngle;
@@ -122,7 +122,6 @@ const WheelOfFortune = () => {
 
       <PrizePointer />
 
-      <View style={styles.innerShadow} />
       <WheelLights />
       <TouchableOpacity
         onPress={spinWheel}
@@ -178,7 +177,6 @@ const styles = StyleSheet.create({
     color: "#303030",
     fontWeight: 700,
   },
-  innerShadow: {},
 });
 
 export default WheelOfFortune;
