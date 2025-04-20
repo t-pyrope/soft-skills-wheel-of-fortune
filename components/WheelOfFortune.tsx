@@ -34,7 +34,7 @@ const WheelOfFortune = () => {
     const extraAngle =
       Math.floor(Math.random() * DEFINITIONS.length) * segmentAngle;
 
-    const finalAngle = 2 * 360 + extraAngle;
+    const finalAngle = 2 * 360 + extraAngle + 270 + segmentAngle / 2;
 
     const selectedSegmentIndex = Math.floor(
       ((360 - extraAngle) / segmentAngle) % DEFINITIONS.length,
@@ -142,15 +142,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "relative",
     marginBlockStart: 20,
-  },
-  wheelHolder: {
-    position: "absolute",
-    top: 150,
-    height: 340,
-    width: 340,
-    borderRadius: "50%",
-    backgroundImage: "linear-gradient(#9b45e2, #8445e2)",
-    backgroundColor: "#8445e2",
   },
   wheel: {
     position: "absolute",

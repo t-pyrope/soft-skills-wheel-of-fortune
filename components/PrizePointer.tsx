@@ -13,8 +13,8 @@ export const PrizePointer = () => {
       >
         <Defs>
           <RadialGradient id="prizePointerGradient">
-            <Stop offset="0" stopColor={`#fbf6cb`} />
-            <Stop offset="1" stopColor={`#fad9a8`} />
+            <Stop offset="0" stopColor={`#faf5d8`} />
+            <Stop offset="1" stopColor={`#fae0a8`} />
           </RadialGradient>
         </Defs>
         <G rotation="0" origin="50, 50">
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     width: 300,
     alignItems: "center",
     justifyContent: "center",
-    transform: "scale(1.1) translate(2px, 0px) ",
+    transform: "scale(1.1) translate(0.1px, -5px) rotate(288deg)",
   },
   wheelPointerSvg: {
     overflow: "visible",
