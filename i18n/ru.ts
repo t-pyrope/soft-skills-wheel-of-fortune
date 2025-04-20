@@ -1,4 +1,5 @@
 export const ru = {
+  title: "Колесо фортуны мягких навыков",
   skills: {
     analyticalThinking: {
       name: "Аналитическое мышление",

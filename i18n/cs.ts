@@ -1,4 +1,5 @@
 export const cs = {
+  title: "Kolo štěstí měkkých dovedností",
   skills: {
     analyticalThinking: {
       name: "Analytické myšlení",

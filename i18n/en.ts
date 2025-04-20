@@ -1,4 +1,5 @@
 export const en = {
+  title: "Soft skills wheel of fortune",
   skills: {
     analyticalThinking: {
       name: "Analytical thinking",

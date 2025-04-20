@@ -5,13 +5,16 @@ import {
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
+import Head from "expo-router/head";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { Platform } from "react-native";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { AppContextProvider } from "@/contexts/AppContext";
+import { i18n } from "@/i18n/config";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -35,8 +38,13 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <AppContextProvider>
+        {Platform.OS === "web" && (
+          <Head>
+            <title>{i18n.t("title")}</title>
+          </Head>
+        )}
         <Stack>
-          <Stack.Screen name="(drawer)" options={{ headerShown: false, title: "Softtt" }} />
+          <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
       </AppContextProvider>
