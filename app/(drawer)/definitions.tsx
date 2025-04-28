@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     position: "static",
     padding: 20,
     paddingBottom: 40,
+    backgroundColor: "#faf3e8",
   },
   item: {
     marginVertical: 8,

@@ -9,7 +9,7 @@ export const WheelBackground = () => {
         <Defs>
           <LinearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <Stop offset="0" stopColor={`#b278e1`} />
-            <Stop offset="1" stopColor={`#8445e2`} />
+            <Stop offset="1" stopColor={`#a345e2`} />
           </LinearGradient>
         </Defs>
         <Circle

@@ -93,5 +93,6 @@ const styles = StyleSheet.create({
     position: "static",
     padding: 20,
     paddingBottom: 40,
+    backgroundColor: "#faf6f0",
   },
 });

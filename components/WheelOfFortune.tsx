@@ -64,7 +64,7 @@ const WheelOfFortune = () => {
   });
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { marginBlockStart: 60 }]}>
       <View style={styles.container}>
         <WheelBackground />
       </View>
@@ -87,10 +87,10 @@ const WheelOfFortune = () => {
                 Z
               `;
 
-              let color = "rgba(165,64,223,0.89)";
+              let color = "rgba(158,75,207,0.89)";
 
               if (index % 2 === 0) {
-                color = "rgba(246,153,239,0.68)";
+                color = "rgba(234,168,223,0.68)";
               }
 
               return (
@@ -106,7 +106,6 @@ const WheelOfFortune = () => {
                     <TextPath
                       href={`#part-${index}`}
                       startOffset="33"
-                      fillOpacity={0.8}
                     >
                       <TSpan x={0} dy={-9} fontSize={8}>
                         {emoji}
@@ -132,6 +131,7 @@ const WheelOfFortune = () => {
           {i18n.t("wheel.spin")}
         </ThemedText>
       </TouchableOpacity>
+      <ThemedText style={{ opacity: 0.6, marginTop: 8 }}>{i18n.t("wheel.spinsLeft", { limit })}</ThemedText>
     </View>
   );
 };
@@ -156,17 +156,18 @@ const styles = StyleSheet.create({
     marginBlockEnd: 15,
     height: 56,
     paddingInline: 30,
-    backgroundColor: "#ff9473",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15,
+    flexDirection: "row",
+    backgroundColor: "#7f4898",
   },
   disabledButton: {
     opacity: 0.7,
   },
   buttonText: {
-    color: "#303030",
-    fontWeight: 700,
+    color: "#fff",
+    fontWeight: 500,
   },
 });
 

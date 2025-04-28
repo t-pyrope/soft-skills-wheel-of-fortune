@@ -5,8 +5,10 @@ import { ThemedText } from "@/components/ThemedText";
 export const Header = ({ title }: { title: string }) => {
   return (
     <View style={styles.intro}>
-      <DrawerToggleButton tintColor={"#000"} />
-      <ThemedText type="title">{title}</ThemedText>
+      <DrawerToggleButton tintColor={"#7f4898"} />
+      <ThemedText type="title" style={{ color: "#7f4898" }}>
+        {title}
+      </ThemedText>
     </View>
   );
 };
@@ -14,9 +16,12 @@ export const Header = ({ title }: { title: string }) => {
 const styles = StyleSheet.create({
   intro: {
     width: "100%",
-    height: 40,
     padding: 6,
+    paddingTop: 14,
+    paddingBottom: 14,
     alignItems: "center",
     flexDirection: "row",
+    backgroundColor: "rgba(221,145,145,0.09)",
+    borderRadius: 30,
   },
 });
