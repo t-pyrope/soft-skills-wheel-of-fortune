@@ -87,10 +87,10 @@ const WheelOfFortune = () => {
                 Z
               `;
 
-              let color = "rgba(158,75,207,0.89)";
+              let color = "rgba(172,60,209,0.89)";
 
               if (index % 2 === 0) {
-                color = "rgba(234,168,223,0.68)";
+                color = "rgba(230,185,196,0.68)";
               }
 
               return (

@@ -8,8 +8,8 @@ export const WheelBackground = () => {
       <Svg width={338} height={338}>
         <Defs>
           <LinearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <Stop offset="0" stopColor={`#b278e1`} />
-            <Stop offset="1" stopColor={`#a345e2`} />
+            <Stop offset="0" stopColor={`#9b5bbc`} />
+            <Stop offset="1" stopColor={`#8d54c3`} />
           </LinearGradient>
         </Defs>
         <Circle
