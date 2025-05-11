@@ -27,6 +27,10 @@ export const Colors = {
   dark: {
     app: "#7f4898",
     text: "#ECEDEE",
+
+    white: "#000",
+    lightGray: "#353535",
+
     background: "#151718",
     icon: "#9BA1A6",
 
