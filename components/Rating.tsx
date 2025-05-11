@@ -2,6 +2,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 
+import { Colors } from "@/constants/Colors";
+
 export const StarRating = ({
   rating,
   setRating,
@@ -20,7 +22,9 @@ export const StarRating = ({
           <FontAwesome
             name={index < rating ? "star" : "star-o"}
             size={30}
-            color={index < rating ? "#FFD700" : "#ccc"}
+            color={
+              index < rating ? Colors.light.rating : Colors.light.lightGray
+            }
             style={styles.star}
           />
         </TouchableOpacity>

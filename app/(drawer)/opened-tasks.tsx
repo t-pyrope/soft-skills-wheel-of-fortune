@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Header } from "@/components/Header";
 import { i18n } from "@/i18n/config";
@@ -9,6 +8,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { OpenedTask } from "@/components/OpenedTask";
 import { useAppContext } from "@/contexts/AppContext";
 import { RadioGroup } from "@/components/ui/RadioGroup";
+import { ThemedSafeAreaView } from "@/components/ui/ThemedSafeAreaView";
 import { Filters } from "@/types/Filters";
 import {
   DEFAULT_SAVED_FILTERS,
@@ -61,7 +61,7 @@ export default function OpenedTasks() {
         );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ThemedSafeAreaView style={styles.container}>
       <Header title={i18n.t("openedTasks.title")} />
       <RadioGroup
         options={[
@@ -83,7 +83,7 @@ export default function OpenedTasks() {
           renderItem={({ item }) => <OpenedTask task={item} />}
         />
       </View>
-    </SafeAreaView>
+    </ThemedSafeAreaView>
   );
 }
 
@@ -93,6 +93,5 @@ const styles = StyleSheet.create({
     position: "static",
     padding: 20,
     paddingBottom: 40,
-    backgroundColor: "#faf6f0",
   },
 });

@@ -9,7 +9,6 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useAppContext } from "@/contexts/AppContext";
 import { ThemedText } from "@/components/ThemedText";
@@ -19,13 +18,15 @@ import { i18n } from "@/i18n/config";
 import { app } from "@/firebaseConfig";
 import { Task } from "@/types/Task";
 import { DEFINITIONS } from "@/constants/softSkills";
+import { ThemedSafeAreaView } from "@/components/ui/ThemedSafeAreaView";
+import { Colors } from "@/constants/Colors";
 
 const db = getFirestore(app);
 
 export default function YouWon() {
   const [taskId, setTaskId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { prize, setOpenedTasks, openedTasks, setPrize, decreaseLimit, limit } =
+  const { prize, setOpenedTasks, openedTasks, setPrize, decreaseLimit } =
     useAppContext();
   const navigationContainer = useNavigationContainerRef();
   const isNavigationReady = navigationContainer.isReady();
@@ -112,15 +113,15 @@ export default function YouWon() {
 
   if (isLoading || prize === null) {
     return (
-      <SafeAreaView style={styles.container}>
-        <ActivityIndicator size="large" color="#3e14b1" />
-      </SafeAreaView>
+      <ThemedSafeAreaView style={styles.container}>
+        <ActivityIndicator size="large" color={Colors.light.app} />
+      </ThemedSafeAreaView>
     );
   }
 
   if (!isLoading && taskId === null && prize) {
     return (
-      <SafeAreaView style={styles.container}>
+      <ThemedSafeAreaView style={styles.container}>
         <ThemedText>
           {i18n.t("wheel.noTask.noMoreTasks", {
             skill: DEFINITIONS[prize - 1].title,
@@ -133,12 +134,12 @@ export default function YouWon() {
         >
           <ThemedText>{i18n.t("wheel.close")}</ThemedText>
         </TouchableOpacity>
-      </SafeAreaView>
+      </ThemedSafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ThemedSafeAreaView style={styles.container}>
       <ThemedText style={styles.prizeText}>
         {i18n.t("wheel.youWon", { skill: DEFINITIONS[prize - 1].title })}
       </ThemedText>
@@ -151,7 +152,7 @@ export default function YouWon() {
           onPress={handleToggleDone}
         >
           <Ionicons name="checkmark-circle" size={32} color="white" />
-          <ThemedText>
+          <ThemedText style={{ color: Colors.light.white }}>
             {task?.done
               ? i18n.t("wheel.unmarkAsDone")
               : i18n.t("wheel.markAsDone")}
@@ -164,7 +165,7 @@ export default function YouWon() {
           <ThemedText>{i18n.t("wheel.close")}</ThemedText>
         </TouchableOpacity>
       </ThemedView>
-    </SafeAreaView>
+    </ThemedSafeAreaView>
   );
 }
 
@@ -180,14 +181,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 20,
     fontWeight: "bold",
-    color: "#333",
     height: 50,
     textAlign: "center",
   },
   buttonsContainer: {
     flexDirection: "row",
     gap: 20,
-    backgroundColor: "transparent",
   },
   button: {
     borderRadius: 15,
@@ -199,11 +198,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   doneButton: {
-    backgroundColor: "#bfbbec",
+    backgroundColor: Colors.light.app,
     gap: 10,
   },
   closeButton: {
     borderWidth: 2,
-    borderColor: "#3e14b1",
+    borderColor: Colors.light.app,
   },
 });

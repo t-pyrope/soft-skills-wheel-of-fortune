@@ -2,14 +2,16 @@ import { StyleSheet, View } from "react-native";
 import Svg, { Circle, Defs, LinearGradient, Stop } from "react-native-svg";
 import React from "react";
 
+import { Colors } from "@/constants/Colors";
+
 export const WheelBackground = () => {
   return (
     <View style={styles.container}>
       <Svg width={338} height={338}>
         <Defs>
           <LinearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <Stop offset="0" stopColor={`#9b5bbc`} />
-            <Stop offset="1" stopColor={`#8d54c3`} />
+            <Stop offset="0" stopColor={Colors.light.wheelBgGradient1} />
+            <Stop offset="1" stopColor={Colors.light.wheelBgGradient2} />
           </LinearGradient>
         </Defs>
         <Circle

@@ -1,5 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+
 import { ThemedText } from "@/components/ThemedText";
+import { Colors } from "@/constants/Colors";
 
 export const RadioGroup = ({
   options,
@@ -27,7 +29,10 @@ export const RadioGroup = ({
               height: 24,
               borderRadius: 12,
               borderWidth: 2,
-              borderColor: selectedValue === option.value ? "#6200ea" : "#aaa",
+              borderColor:
+                selectedValue === option.value
+                  ? Colors.light.app
+                  : Colors.light.icon,
               justifyContent: "center",
               alignItems: "center",
               marginRight: 8,
@@ -57,6 +62,6 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: "#6200ea",
+    backgroundColor: Colors.light.app,
   },
 });

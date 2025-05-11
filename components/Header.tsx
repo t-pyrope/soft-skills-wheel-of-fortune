@@ -1,12 +1,14 @@
 import { StyleSheet, View } from "react-native";
 import { DrawerToggleButton } from "@react-navigation/drawer";
+
 import { ThemedText } from "@/components/ThemedText";
+import { Colors } from "@/constants/Colors";
 
 export const Header = ({ title }: { title: string }) => {
   return (
     <View style={styles.intro}>
-      <DrawerToggleButton tintColor={"#7f4898"} />
-      <ThemedText type="title" style={{ color: "#7f4898" }}>
+      <DrawerToggleButton tintColor={Colors.light.app} />
+      <ThemedText type="title" style={{ color: Colors.light.app }}>
         {title}
       </ThemedText>
     </View>
@@ -21,7 +23,7 @@ const styles = StyleSheet.create({
     paddingBottom: 14,
     alignItems: "center",
     flexDirection: "row",
-    backgroundColor: "rgba(221,145,145,0.09)",
+    backgroundColor: Colors.light.headerBg,
     borderRadius: 30,
   },
 });

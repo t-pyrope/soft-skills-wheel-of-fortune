@@ -1,16 +1,16 @@
 import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Header } from "@/components/Header";
+import { ThemedSafeAreaView } from "@/components/ui/ThemedSafeAreaView";
 import WheelOfFortune from "@/components/WheelOfFortune";
 import { i18n } from "@/i18n/config";
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView style={styles.container}>
+    <ThemedSafeAreaView style={styles.container}>
       <Header title={i18n.t("wheel.title")} />
       <WheelOfFortune />
-    </SafeAreaView>
+    </ThemedSafeAreaView>
   );
 }
 
@@ -24,6 +24,5 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     flex: 1,
-    backgroundColor: "#faf3e8",
   },
 });

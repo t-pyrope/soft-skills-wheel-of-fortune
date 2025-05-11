@@ -2,6 +2,8 @@ import { StyleSheet, View } from "react-native";
 import Svg, { Defs, G, Path, RadialGradient, Stop } from "react-native-svg";
 import React from "react";
 
+import { Colors } from "@/constants/Colors";
+
 export const PrizePointer = () => {
   return (
     <View style={styles.wheelPointer}>
@@ -13,8 +15,8 @@ export const PrizePointer = () => {
       >
         <Defs>
           <RadialGradient id="prizePointerGradient">
-            <Stop offset="0" stopColor={`#faf5d8`} />
-            <Stop offset="1" stopColor={`#fae0a8`} />
+            <Stop offset="0" stopColor={Colors.light.prizePointerGradient1} />
+            <Stop offset="1" stopColor={Colors.light.prizePointerGradient2} />
           </RadialGradient>
         </Defs>
         <G rotation="0" origin="50, 50">

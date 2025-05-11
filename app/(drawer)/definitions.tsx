@@ -1,6 +1,7 @@
 import { FlatList, StyleSheet, View } from "react-native";
+
 import { Header } from "@/components/Header";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ThemedSafeAreaView } from "@/components/ui/ThemedSafeAreaView";
 import { ThemedText } from "@/components/ThemedText";
 import { DEFINITIONS } from "@/constants/softSkills";
 import { i18n } from "@/i18n/config";
@@ -31,14 +32,14 @@ const Item = ({
 
 export default function Definitions() {
   return (
-    <SafeAreaView style={styles.container}>
+    <ThemedSafeAreaView style={styles.container}>
       <Header title={i18n.t("definitions.title")} />
       <FlatList
         data={DEFINITIONS}
         renderItem={({ item }) => <Item {...item} />}
         keyExtractor={(item) => item.title}
       />
-    </SafeAreaView>
+    </ThemedSafeAreaView>
   );
 }
 
@@ -48,7 +49,6 @@ const styles = StyleSheet.create({
     position: "static",
     padding: 20,
     paddingBottom: 40,
-    backgroundColor: "#faf3e8",
   },
   item: {
     marginVertical: 8,

@@ -8,6 +8,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { StarRating } from "@/components/Rating";
 import { DEFINITIONS } from "@/constants/softSkills";
 import { useAppContext } from "@/contexts/AppContext";
+import { Colors } from "@/constants/Colors";
 import { i18n } from "@/i18n/config";
 
 export const OpenedTask = ({ task }: { task: ExtendedTask }) => {
@@ -101,10 +102,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     alignSelf: "flex-start",
     marginTop: 10,
-    borderColor: "#bfbbec",
+    borderColor: Colors.light.headerBg,
     borderWidth: 2,
   },
   isDone: {
-    backgroundColor: "#bfbbec",
+    backgroundColor: Colors.light.headerBg,
   },
 });

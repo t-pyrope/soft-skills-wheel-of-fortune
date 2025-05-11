@@ -17,6 +17,7 @@ import { WheelLights } from "@/components/WheelLights";
 import { i18n } from "@/i18n/config";
 import { PrizePointer } from "@/components/PrizePointer";
 import { useAppContext } from "@/contexts/AppContext";
+import { Colors } from "@/constants/Colors";
 
 const segmentAngle = 360 / DEFINITIONS.length;
 
@@ -87,10 +88,10 @@ const WheelOfFortune = () => {
                 Z
               `;
 
-              let color = "rgba(172,60,209,0.89)";
+              let color = Colors.light.wheelOdd;
 
               if (index % 2 === 0) {
-                color = "rgba(230,185,196,0.68)";
+                color = Colors.light.wheelEven;
               }
 
               return (
@@ -98,15 +99,12 @@ const WheelOfFortune = () => {
                   <Path
                     d={pathData}
                     fill={color}
-                    stroke="#FFFFFF"
+                    stroke={Colors.light.white}
                     strokeWidth="0.5"
                     id={`part-${index}`}
                   />
                   <Text>
-                    <TextPath
-                      href={`#part-${index}`}
-                      startOffset="33"
-                    >
+                    <TextPath href={`#part-${index}`} startOffset="33">
                       <TSpan x={0} dy={-9} fontSize={8}>
                         {emoji}
                       </TSpan>
@@ -131,7 +129,9 @@ const WheelOfFortune = () => {
           {i18n.t("wheel.spin")}
         </ThemedText>
       </TouchableOpacity>
-      <ThemedText style={{ opacity: 0.6, marginTop: 8 }}>{i18n.t("wheel.spinsLeft", { limit })}</ThemedText>
+      <ThemedText style={{ opacity: 0.6, marginTop: 8 }}>
+        {i18n.t("wheel.spinsLeft", { limit })}
+      </ThemedText>
     </View>
   );
 };
@@ -160,13 +160,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 15,
     flexDirection: "row",
-    backgroundColor: "#7f4898",
+    backgroundColor: Colors.light.app,
   },
   disabledButton: {
     opacity: 0.7,
   },
   buttonText: {
-    color: "#fff",
+    color: Colors.light.white,
     fontWeight: 500,
   },
 });
