@@ -52,7 +52,7 @@ const WheelOfFortune = () => {
         runOnJS(setIsSpinning)(false);
         runOnJS(setPrize)(selectedSegmentIndex + 1);
         rotation.value = rotation.value % 360;
-        runOnJS(router.push)("/youWonModal");
+        runOnJS(router.push)("/youwon");
       },
     );
   };

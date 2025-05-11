@@ -16,7 +16,7 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
         const options = props.descriptors[route.key].options;
 
         return (
-          <TouchableOpacity>
+          <TouchableOpacity key={route.key}>
             <DrawerItem
               label={options.title ?? ""}
               onPress={() => props.navigation.navigate(route.name)}

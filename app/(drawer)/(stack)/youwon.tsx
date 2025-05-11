@@ -1,5 +1,5 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { router } from "expo-router";
+import { router, useNavigationContainerRef } from "expo-router";
 import {
   getFirestore,
   collection,
@@ -8,7 +8,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useAppContext } from "@/contexts/AppContext";
@@ -22,10 +22,14 @@ import { DEFINITIONS } from "@/constants/softSkills";
 
 const db = getFirestore(app);
 
-export default function YouWonModal() {
+export default function YouWon() {
   const [taskId, setTaskId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { prize, setOpenedTasks, openedTasks, setPrize, decreaseLimit, limit } = useAppContext();
+  const { prize, setOpenedTasks, openedTasks, setPrize, decreaseLimit, limit } =
+    useAppContext();
+  const navigationContainer = useNavigationContainerRef();
+  const isNavigationReady = navigationContainer.isReady();
+
   const task = openedTasks.find((task) => task.id === taskId);
 
   useEffect(() => {
@@ -62,8 +66,16 @@ export default function YouWonModal() {
       }
     };
 
-    fetchRandomDoc();
+    if (prize) {
+      fetchRandomDoc();
+    }
   }, [prize]);
+
+  useEffect(() => {
+    if (prize === null && isNavigationReady) {
+      router.replace("/");
+    }
+  }, [prize, isNavigationReady]);
 
   useEffect(() => {
     return () => {
@@ -98,8 +110,12 @@ export default function YouWonModal() {
     router.back();
   };
 
-  if (isLoading) {
-    return <SafeAreaView style={styles.container}></SafeAreaView>;
+  if (isLoading || prize === null) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <ActivityIndicator size="large" color="#3e14b1" />
+      </SafeAreaView>
+    );
   }
 
   if (!isLoading && taskId === null && prize) {
@@ -123,11 +139,9 @@ export default function YouWonModal() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {prize !== null ? (
-        <ThemedText style={styles.prizeText}>
-          {i18n.t("wheel.youWon", { skill: DEFINITIONS[prize - 1].title })}
-        </ThemedText>
-      ) : null}
+      <ThemedText style={styles.prizeText}>
+        {i18n.t("wheel.youWon", { skill: DEFINITIONS[prize - 1].title })}
+      </ThemedText>
       <ThemedText type="subtitle">{task?.text[i18n.locale as "en"]}</ThemedText>
       <ThemedText>{i18n.t("wheel.taskWillBeAdded")}</ThemedText>
       <StarRating rating={task?.rating ?? 0} setRating={handleSetRating} />
