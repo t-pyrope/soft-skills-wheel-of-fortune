@@ -1,6 +1,7 @@
-import { StyleSheet, View } from "react-native";
-import { Light } from "@/components/Light";
 import React from "react";
+import { StyleSheet, View } from "react-native";
+
+import { Light } from "@/components/wheel/Light";
 
 export const WheelLights = () => {
   return (

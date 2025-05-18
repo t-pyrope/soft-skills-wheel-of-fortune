@@ -21,5 +21,10 @@ export function ThemedSafeAreaView({
     "background",
   );
 
-  return <SafeAreaView style={[{ backgroundColor }, style]} {...otherProps} />;
+  return (
+    <SafeAreaView
+      style={[{ backgroundColor, minHeight: "100%" }, style]}
+      {...otherProps}
+    />
+  );
 }

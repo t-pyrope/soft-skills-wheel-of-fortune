@@ -23,6 +23,8 @@ export const Colors = {
 
     wheelBgGradient1: "#9b5bbc",
     wheelBgGradient2: "#8d54c3",
+
+    drawerItemHovered: "rgb(156,83,101)",
   },
   dark: {
     app: "#7f4898",
@@ -45,5 +47,7 @@ export const Colors = {
 
     wheelBgGradient1: "#9b5bbc",
     wheelBgGradient2: "#8d54c3",
+
+    drawerItemHovered: "rgb(156,83,101)",
   },
 };

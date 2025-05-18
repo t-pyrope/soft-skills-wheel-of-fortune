@@ -12,10 +12,10 @@ import Animated, {
 
 import { DEFINITIONS } from "@/constants/softSkills";
 import { ThemedText } from "@/components/ThemedText";
-import { WheelBackground } from "@/components/WheelBackground";
-import { WheelLights } from "@/components/WheelLights";
+import { WheelBackground } from "@/components/wheel/WheelBackground";
+import { WheelLights } from "@/components/wheel/WheelLights";
 import { i18n } from "@/i18n/config";
-import { PrizePointer } from "@/components/PrizePointer";
+import { PrizePointer } from "@/components/wheel/PrizePointer";
 import { useAppContext } from "@/contexts/AppContext";
 import { Colors } from "@/constants/Colors";
 

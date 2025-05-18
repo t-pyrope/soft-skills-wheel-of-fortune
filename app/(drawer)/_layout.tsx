@@ -1,32 +1,9 @@
-import {
-  DrawerContentComponentProps,
-  DrawerContentScrollView,
-  DrawerItem,
-} from "@react-navigation/drawer";
 import { Drawer } from "expo-router/drawer";
-import { Platform, TouchableOpacity } from "react-native";
+import { Platform } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+import { CustomDrawerContent } from "@/components/CustomDrawerContent";
 import { i18n } from "@/i18n/config";
-
-const CustomDrawerContent = (props: DrawerContentComponentProps) => {
-  return (
-    <DrawerContentScrollView {...props}>
-      {props.state.routes.map((route, i) => {
-        const options = props.descriptors[route.key].options;
-
-        return (
-          <TouchableOpacity key={route.key}>
-            <DrawerItem
-              label={options.title ?? ""}
-              onPress={() => props.navigation.navigate(route.name)}
-            />
-          </TouchableOpacity>
-        );
-      })}
-    </DrawerContentScrollView>
-  );
-};
 
 export default function Layout() {
   return (

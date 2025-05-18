@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 import { Header } from "@/components/Header";
 import { ThemedSafeAreaView } from "@/components/ui/ThemedSafeAreaView";
-import WheelOfFortune from "@/components/WheelOfFortune";
+import WheelOfFortune from "@/components/wheel/WheelOfFortune";
 import { i18n } from "@/i18n/config";
 
 export default function HomeScreen() {
