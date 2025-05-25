@@ -90,6 +90,7 @@ export const ru = {
     youWon: "Вы выиграли",
     definitions: "Определения",
     openedTasks: "Открытые задания",
+    proposeTask: "Предложить задание",
   },
   date: {
     month_names: [
@@ -107,5 +108,8 @@ export const ru = {
       "Ноябрь",
       "Декабрь",
     ],
+  },
+  proposeTask: {
+    title: "Предложить задание",
   },
 };

@@ -90,6 +90,7 @@ export const cs = {
     youWon: "Vyhrál(a) jste",
     definitions: "Terminologie",
     openedTasks: "Otevřené úkoly",
+    proposeTask: "Navrhnout úkol",
   },
   date: {
     month_names: [
@@ -108,4 +109,7 @@ export const cs = {
       "Prosinec",
     ],
   },
+  proposeTask: {
+    title: "Navrhnout úkol"
+  }
 };
