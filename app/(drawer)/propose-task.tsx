@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 
 import { Header } from "@/components/Header";
 import { CustomSelect } from "@/components/ui/Select";
+import { TextArea } from "@/components/ui/TextArea";
 import { ThemedSafeAreaView } from "@/components/ui/ThemedSafeAreaView";
 import { ThemedText } from "@/components/ThemedText";
 import { DEFINITIONS } from "@/constants/softSkills";
-import { Colors } from "@/constants/Colors";
 import { i18n } from "@/i18n/config";
 
 export default function ProposeTask() {
@@ -33,15 +33,12 @@ export default function ProposeTask() {
           label: definition.title,
           value: definition.index,
         }))}
+        label={i18n.t("proposeTask.skillLabel")}
       />
-      <TextInput
-        editable
-        multiline
-        numberOfLines={4}
-        maxLength={40}
-        onChangeText={(text) => setTaskValue(text)}
+      <TextArea
         value={taskValue}
-        style={styles.textInput}
+        setValue={setTaskValue}
+        label={i18n.t("proposeTask.taskDescription")}
       />
       <TouchableOpacity onPress={onSendPress}>
         <ThemedText>Send</ThemedText>
@@ -56,12 +53,5 @@ const styles = StyleSheet.create({
     position: "static",
     padding: 20,
     paddingBottom: 40,
-  },
-  textInput: {
-    padding: 10,
-    borderRadius: 8,
-    borderColor: Colors.light.lightGray,
-    borderWidth: 1,
-    backgroundColor: "#fff",
   },
 });

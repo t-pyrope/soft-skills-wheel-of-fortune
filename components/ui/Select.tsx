@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
-import {Colors} from "@/constants/Colors";
+import { Colors } from "@/constants/Colors";
 
 export const CustomSelect = ({
   options,
+  label,
 }: {
   options: { label: string; value: number }[];
+  label: string;
 }) => {
   const [selectedValue, setSelectedValue] = useState<number>(
     options[0]?.value ?? 0,
@@ -22,7 +24,7 @@ export const CustomSelect = ({
 
   return (
     <View>
-      <ThemedText style={styles.label}>Choose an option:</ThemedText>
+      <ThemedText style={styles.label}>{label}:</ThemedText>
 
       <TouchableOpacity
         style={styles.selectBox}

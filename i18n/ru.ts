@@ -111,5 +111,7 @@ export const ru = {
   },
   proposeTask: {
     title: "Предложить задание",
+    skillLabel: "Навык",
+    taskDescription: "Описание задания"
   },
 };

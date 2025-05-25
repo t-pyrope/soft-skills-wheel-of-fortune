@@ -90,7 +90,7 @@ export const en = {
     youWon: "You won",
     definitions: "Definitions",
     openedTasks: "Opened tasks",
-    proposeTask: "Propose a task"
+    proposeTask: "Propose a task",
   },
   date: {
     month_names: [
@@ -110,6 +110,8 @@ export const en = {
     ],
   },
   proposeTask: {
-    title: "Propose task"
-  }
+    title: "Propose task",
+    skillLabel: "Skill",
+    taskDescription: "Task description",
+  },
 };

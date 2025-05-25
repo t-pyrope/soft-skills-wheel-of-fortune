@@ -110,6 +110,8 @@ export const cs = {
     ],
   },
   proposeTask: {
-    title: "Navrhnout úkol"
-  }
+    title: "Navrhnout úkol",
+    skillLabel: "Dovednost",
+    taskDescription: "Popis úkolu",
+  },
 };
