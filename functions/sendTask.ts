@@ -4,6 +4,7 @@ interface RequestBody {
 }
 
 exports.handler = async function (event: any) {
+  console.log(event);
   if (event.httpMethod !== "POST") {
     return new Response("Method Not Allowed", { status: 405 });
   }
