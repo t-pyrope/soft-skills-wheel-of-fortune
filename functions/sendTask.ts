@@ -4,16 +4,15 @@ interface RequestBody {
 }
 
 exports.handler = async function (event: any) {
-  console.log(event);
-  if (event.httpMethod !== "POST") {
-    return new Response("Method Not Allowed", { status: 405 });
-  }
-
-  if (event.body === null) {
-    return new Response("Request body is missing or empty", { status: 400 });
-  }
-
   try {
+    console.log(event);
+    if (event.httpMethod !== "POST") {
+      return new Response("Method Not Allowed", { status: 405 });
+    }
+
+    if (event.body === null) {
+      return new Response("Request body is missing or empty", { status: 400 });
+    }
     const requestBody = JSON.parse(event.body) as RequestBody;
     if (requestBody && requestBody.skill !== undefined && requestBody.task) {
       console.log(requestBody);
