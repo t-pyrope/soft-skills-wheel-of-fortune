@@ -7,6 +7,7 @@ import {
   DrawerItem,
 } from "@react-navigation/drawer";
 
+import { Button } from "@/components/ui/Button";
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedSafeAreaView } from "@/components/ui/ThemedSafeAreaView";
@@ -58,14 +59,11 @@ export const CustomDrawerContent = (props: DrawerContentComponentProps) => {
             })}
           </ThemedView>
           <View style={{ alignItems: "center", marginTop: 10 }}>
-            <TouchableOpacity
-              style={styles.proposeButton}
+            <Button
+              disabled={false}
               onPress={() => props.navigation.navigate("propose-task")}
-            >
-              <ThemedText style={{ color: Colors.light.white }}>
-                {i18n.t("menu.proposeTask")}
-              </ThemedText>
-            </TouchableOpacity>
+              text={i18n.t("menu.proposeTask")}
+            />
           </View>
         </View>
       </DrawerContentScrollView>
@@ -97,15 +95,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-  },
-  proposeButton: {
-    height: 50,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 24,
-    flexDirection: "row",
-    backgroundColor: Colors.light.app,
-    color: "white",
   },
 });

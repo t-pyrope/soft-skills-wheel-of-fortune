@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Svg, { G, Path, Text, TextPath, TSpan } from "react-native-svg";
 import Animated, {
   useSharedValue,
@@ -11,6 +11,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { DEFINITIONS } from "@/constants/softSkills";
+import { Button } from "@/components/ui/Button";
 import { ThemedText } from "@/components/ThemedText";
 import { WheelBackground } from "@/components/wheel/WheelBackground";
 import { WheelLights } from "@/components/wheel/WheelLights";
@@ -120,15 +121,13 @@ const WheelOfFortune = () => {
       <PrizePointer />
 
       <WheelLights />
-      <TouchableOpacity
-        onPress={spinWheel}
-        style={[styles.button, limit === 0 ? styles.disabledButton : undefined]}
-        disabled={limit === 0}
-      >
-        <ThemedText style={styles.buttonText} type="subtitle">
-          {i18n.t("wheel.spin")}
-        </ThemedText>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <Button
+          onPress={spinWheel}
+          disabled={limit === 0}
+          text={i18n.t("wheel.spin")}
+        />
+      </View>
       <ThemedText style={{ opacity: 0.6, marginTop: 8 }}>
         {i18n.t("wheel.spinsLeft", { limit })}
       </ThemedText>
@@ -151,23 +150,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  button: {
+  buttonContainer: {
     marginBlockStart: 50,
     marginBlockEnd: 15,
-    height: 56,
-    paddingInline: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 15,
-    flexDirection: "row",
-    backgroundColor: Colors.light.app,
-  },
-  disabledButton: {
-    opacity: 0.7,
-  },
-  buttonText: {
-    color: Colors.light.white,
-    fontWeight: 500,
   },
 });
 

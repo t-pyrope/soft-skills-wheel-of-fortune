@@ -6,19 +6,20 @@ import { Colors } from "@/constants/Colors";
 export const CustomSelect = ({
   options,
   label,
+  value,
+  onSelect,
 }: {
   options: { label: string; value: number }[];
   label: string;
+  value: string | number;
+  onSelect: (newVal: string | number) => void;
 }) => {
-  const [selectedValue, setSelectedValue] = useState<number>(
-    options[0]?.value ?? 0,
-  );
   const [modalVisible, setModalVisible] = useState(false);
   const selectedLabel =
-    options.find((option) => option.value === selectedValue)?.label ?? "";
+    options.find((option) => option.value === value)?.label ?? "";
 
-  const handleSelect = (value: number) => {
-    setSelectedValue(value);
+  const handleSelect = (value: number | string) => {
+    onSelect(value);
     setModalVisible(false);
   };
 

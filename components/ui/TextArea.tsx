@@ -8,11 +8,13 @@ export const TextArea = ({
   value,
   setValue,
   maxLength = 300,
+  error,
 }: {
   label: string;
   value: string;
   setValue: (val: string) => void;
   maxLength?: number;
+  error?: string;
 }) => {
   return (
     <View>
@@ -24,8 +26,9 @@ export const TextArea = ({
         maxLength={maxLength}
         onChangeText={(text) => setValue(text)}
         value={value}
-        style={styles.textInput}
+        style={[styles.textInput, error ? styles.textInputError : undefined]}
       />
+      {error && <ThemedText style={styles.errorText}>{error}</ThemedText>}
     </View>
   );
 };
@@ -40,5 +43,11 @@ const styles = StyleSheet.create({
     borderColor: Colors.light.lightGray,
     borderWidth: 1,
     backgroundColor: "#fff",
+  },
+  textInputError: {
+    borderColor: Colors.light.error,
+  },
+  errorText: {
+    color: Colors.light.error,
   },
 });

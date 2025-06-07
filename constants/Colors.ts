@@ -11,6 +11,7 @@ export const Colors = {
     white: "#fff",
     lightGray: "#ccc",
     icon: "#687076",
+    error: "#cf313c",
 
     headerBg: "rgba(221,145,145,0.09)",
     rating: "#ddd205",
@@ -29,12 +30,11 @@ export const Colors = {
   dark: {
     app: "#7f4898",
     text: "#ECEDEE",
-
     white: "#000",
     lightGray: "#353535",
-
     background: "#151718",
     icon: "#9BA1A6",
+    error: "#cf313c",
 
     headerBg: "rgba(221,145,145,0.09)",
     rating: "#ddd205",
