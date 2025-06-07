@@ -1,14 +1,9 @@
-import { HandlerEvent, HandlerContext } from "@netlify/functions";
-
 interface RequestBody {
   skill: number;
   task: string;
 }
 
-exports.handler = async function (
-  event: HandlerEvent,
-  context: HandlerContext,
-) {
+exports.handler = async function (event: any) {
   if (event.httpMethod !== "POST") {
     return new Response("Method Not Allowed", { status: 405 });
   }
