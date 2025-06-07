@@ -1,4 +1,4 @@
 [build]
   functions = "functions"
-  command = "npx expo export:web"
+  command = "npm run export"
   publish = "web-build/"
