@@ -49,7 +49,7 @@ exports.handler = async function (event: HandlerEvent, context: Context) {
 
     const requestBody = JSON.parse(event.body) as RequestBody;
 
-    console.log(requestBody)
+    console.log(requestBody);
 
     if (requestBody && requestBody.skill !== undefined && requestBody.task) {
       console.log(requestBody);
@@ -80,7 +80,6 @@ exports.handler = async function (event: HandlerEvent, context: Context) {
 
       return new Response(
         JSON.stringify({
-          message: "OK",
           skill,
           task,
         }),
