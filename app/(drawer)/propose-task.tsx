@@ -27,10 +27,9 @@ export default function ProposeTask() {
           body: JSON.stringify(values),
         },
       );
-      // const json = await res.json();
-      const text = await res.text();
+      const json = await res.json();
 
-      console.log(text);
+      console.log(json);
     } catch (e) {
       console.error(e);
     }

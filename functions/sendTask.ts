@@ -1,6 +1,6 @@
 import { LRUCache } from "lru-cache";
 import * as nodemailer from "nodemailer";
-import { Context, HandlerEvent } from "@netlify/functions";
+import { Context } from "@netlify/functions";
 
 interface RequestBody {
   skill: number;
@@ -12,10 +12,9 @@ const rateLimit = new LRUCache({
   ttl: 60 * 1000,
 });
 
-export default async function (event: HandlerEvent, context: Context) {
+export default async function (request: Request, context: Context) {
   try {
-    console.log(event);
-    if (event.httpMethod !== "POST") {
+    if (request.method !== "POST") {
       return new Response(
         JSON.stringify({
           message: "Method Not Allowed",
@@ -24,17 +23,7 @@ export default async function (event: HandlerEvent, context: Context) {
       );
     }
 
-    const ip =
-      event.headers["x-nf-client-connection-ip"] || context.ip || "unknown-ip";
-
-    if (event.body === null || event.body.trim() === "") {
-      return new Response(
-        JSON.stringify({
-          message: "Request body is missing or empty",
-        }),
-        { status: 400 },
-      );
-    }
+    const ip = request.headers.get('x-nf-client-connection-ip') || context.ip;
 
     if (rateLimit.has(ip)) {
       return new Response(
@@ -47,12 +36,10 @@ export default async function (event: HandlerEvent, context: Context) {
 
     rateLimit.set(ip, true, { ttl: 60000 });
 
-    const requestBody = JSON.parse(event.body) as RequestBody;
+    const body = await request.json() as RequestBody;
 
-    console.log(requestBody);
-
-    if (requestBody && requestBody.skill !== undefined && requestBody.task) {
-      console.log(requestBody);
+    if (body && body.skill !== undefined && body.task) {
+      console.log(body);
 
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -62,7 +49,7 @@ export default async function (event: HandlerEvent, context: Context) {
         },
       });
 
-      const { skill, task } = requestBody;
+      const { skill, task } = body;
 
       const mockMail = "example@mail.com";
       const message = `Skill: ${skill}, text: ${task}`;
