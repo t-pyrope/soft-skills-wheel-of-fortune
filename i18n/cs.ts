@@ -91,6 +91,7 @@ export const cs = {
     definitions: "Terminologie",
     openedTasks: "Otevřené úkoly",
     proposeTask: "Navrhnout úkol",
+    privacyPolicy: "Zásady ochrany osobních údajů",
   },
   date: {
     month_names: [

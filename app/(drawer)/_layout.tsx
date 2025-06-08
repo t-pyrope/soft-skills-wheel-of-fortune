@@ -9,7 +9,10 @@ export default function Layout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
-        screenOptions={{ drawerType: "front", headerShown: false }}
+        screenOptions={{
+          drawerType: "front",
+          headerShown: false,
+        }}
         drawerContent={(props) => <CustomDrawerContent {...props} />}
       >
         <Drawer.Screen
@@ -32,6 +35,7 @@ export default function Layout() {
                 : {},
           }}
         />
+
         <Drawer.Screen
           name="opened-tasks"
           options={{
@@ -45,20 +49,35 @@ export default function Layout() {
                 : {},
           }}
         />
+
+        <Drawer.Screen
+          name="privacy-policy"
+          options={{
+            title: i18n.t("menu.privacyPolicy"),
+            sceneStyle:
+              Platform.OS === "web"
+                ? {
+                    flexGrow: 1,
+                    overflow: "scroll",
+                  }
+                : {},
+          }}
+        />
+
+        <Drawer.Screen
+          name="propose-task"
+          options={{
+            title: i18n.t("menu.proposeTask"),
+            sceneStyle:
+              Platform.OS === "web"
+                ? {
+                    flexGrow: 1,
+                    overflow: "scroll",
+                  }
+                : {},
+          }}
+        />
       </Drawer>
-      <Drawer.Screen
-        name="propose-task"
-        options={{
-          title: "Hi",
-          sceneStyle:
-            Platform.OS === "web"
-              ? {
-                  flexGrow: 1,
-                  overflow: "scroll",
-                }
-              : {},
-        }}
-      />
     </GestureHandlerRootView>
   );
 }

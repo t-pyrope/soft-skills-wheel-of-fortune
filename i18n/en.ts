@@ -91,6 +91,7 @@ export const en = {
     definitions: "Definitions",
     openedTasks: "Opened tasks",
     proposeTask: "Propose a task",
+    privacyPolicy: 'Privacy policy',
   },
   date: {
     month_names: [

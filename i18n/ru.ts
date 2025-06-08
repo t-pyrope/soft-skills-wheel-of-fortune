@@ -91,6 +91,7 @@ export const ru = {
     definitions: "Определения",
     openedTasks: "Открытые задания",
     proposeTask: "Предложить задание",
+    privacyPolicy: "Политика конфиденциальности",
   },
   date: {
     month_names: [
@@ -112,6 +113,6 @@ export const ru = {
   proposeTask: {
     title: "Предложить задание",
     skillLabel: "Навык",
-    taskDescription: "Описание задания"
+    taskDescription: "Описание задания",
   },
 };
