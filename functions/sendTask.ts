@@ -12,7 +12,7 @@ const rateLimit = new LRUCache({
   ttl: 60 * 1000,
 });
 
-exports.handler = async function (event: HandlerEvent, context: Context) {
+export default async function (event: HandlerEvent, context: Context) {
   try {
     console.log(event);
     if (event.httpMethod !== "POST") {
