@@ -1,6 +1,6 @@
 import { LRUCache } from "lru-cache";
 import * as nodemailer from "nodemailer";
-import { Context } from "@netlify/functions";
+import { Context, HandlerEvent } from "@netlify/functions";
 
 interface RequestBody {
   skill: number;
@@ -12,10 +12,10 @@ const rateLimit = new LRUCache({
   ttl: 60 * 1000,
 });
 
-exports.handler = async function (req: Request, context: Context) {
+exports.handler = async function (event: HandlerEvent, context: Context) {
   try {
-    console.log(req);
-    if (req.method !== "POST") {
+    console.log(event);
+    if (event.httpMethod !== "POST") {
       return new Response(
         JSON.stringify({
           message: "Method Not Allowed",
@@ -24,9 +24,10 @@ exports.handler = async function (req: Request, context: Context) {
       );
     }
 
-    const ip = req.headers.get("x-nf-client-connection-ip") || context.ip;
+    const ip =
+      event.headers["x-nf-client-connection-ip"] || context.ip || "unknown-ip";
 
-    if (req.body === null) {
+    if (event.body === null || event.body.trim() === "") {
       return new Response(
         JSON.stringify({
           message: "Request body is missing or empty",
@@ -46,7 +47,9 @@ exports.handler = async function (req: Request, context: Context) {
 
     rateLimit.set(ip, true, { ttl: 60000 });
 
-    const requestBody = (await req.json()) as RequestBody;
+    const requestBody = JSON.parse(event.body) as RequestBody;
+
+    console.log(requestBody)
 
     if (requestBody && requestBody.skill !== undefined && requestBody.task) {
       console.log(requestBody);
@@ -84,19 +87,11 @@ exports.handler = async function (req: Request, context: Context) {
       );
     }
   } catch (error) {
-    console.error("Error parsing JSON body:", error);
     return new Response(
       JSON.stringify({
-        message: "Invalid JSON body.",
+        message: "Internal error",
       }),
       { status: 400 },
     );
   }
-
-  return new Response(
-    JSON.stringify({
-      message: "Internal error",
-    }),
-    { status: 500 },
-  );
 };
