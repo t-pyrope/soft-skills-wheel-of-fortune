@@ -115,5 +115,11 @@ export const ru = {
     title: "Предложить задание",
     skillLabel: "Навык",
     taskDescription: "Описание задания",
+    email: "Email для связи о задании",
+    send: "Отправить",
+    errors: {
+      required: "Обязательное поле",
+      notEmail: "Недействительный email",
+    },
   },
 };

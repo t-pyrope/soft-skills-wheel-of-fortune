@@ -5,6 +5,7 @@ import { Context } from "@netlify/functions";
 interface RequestBody {
   skill: number;
   task: string;
+  email: string;
 }
 
 const rateLimit = new LRUCache({
@@ -38,7 +39,7 @@ export default async function (request: Request, context: Context) {
 
     const body = await request.json() as RequestBody;
 
-    if (body && body.skill !== undefined && body.task) {
+    if (body && body.skill !== undefined && body.task && body.email) {
       console.log(body);
 
       const transporter = nodemailer.createTransport({
@@ -49,17 +50,16 @@ export default async function (request: Request, context: Context) {
         },
       });
 
-      const { skill, task } = body;
+      const { skill, task, email } = body;
 
-      const mockMail = "example@mail.com";
       const message = `Skill: ${skill}, text: ${task}`;
 
       const mailOptions = {
-        from: mockMail,
+        from: email,
         to: process.env.EMAIL_TO,
-        subject: `New message from ${mockMail}`,
+        subject: `New message from ${email}`,
         text: message,
-        html: `<p><strong>Email:</strong> ${mockMail}</p>
+        html: `<p><strong>Email:</strong> ${email}</p>
              <p><strong>Message:</strong> ${message}</p>`,
       };
 

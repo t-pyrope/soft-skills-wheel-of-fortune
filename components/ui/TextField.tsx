@@ -3,17 +3,19 @@ import { StyleSheet, TextInput, View } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { Colors } from "@/constants/Colors";
 
-export const TextArea = ({
+export const TextField = ({
   label,
   value,
   setValue,
   maxLength = 300,
   error,
+  multiline = false,
 }: {
   label: string;
   value: string;
   setValue: (val: string) => void;
   maxLength?: number;
+  multiline?: boolean;
   error?: string;
 }) => {
   return (
@@ -21,8 +23,8 @@ export const TextArea = ({
       <ThemedText>{label}:</ThemedText>
       <TextInput
         editable
-        multiline
-        numberOfLines={4}
+        multiline={multiline}
+        numberOfLines={multiline ? 4 : 1}
         maxLength={maxLength}
         onChangeText={(text) => setValue(text)}
         value={value}

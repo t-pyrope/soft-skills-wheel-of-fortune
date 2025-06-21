@@ -3,7 +3,6 @@ import { FlatList, StyleSheet, View } from "react-native";
 
 import { Header } from "@/components/Header";
 import { i18n } from "@/i18n/config";
-import { getSavedTasks } from "@/utils/getSavedTasks";
 import { ThemedText } from "@/components/ThemedText";
 import { OpenedTask } from "@/components/OpenedTask";
 import { useAppContext } from "@/contexts/AppContext";
@@ -13,8 +12,9 @@ import { Filters } from "@/types/Filters";
 import {
   DEFAULT_SAVED_FILTERS,
   getSavedFilters,
-} from "@/utils/getSavedFilters";
-import { setSavedFilters } from "@/utils/setSavedFilters";
+  getSavedTasks,
+  setSavedFilters,
+} from "@/utils";
 
 export default function OpenedTasks() {
   const { openedTasks, setOpenedTasks } = useAppContext();

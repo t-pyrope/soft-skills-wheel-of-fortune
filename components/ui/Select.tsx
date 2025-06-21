@@ -1,3 +1,4 @@
+import AntDesign from "@expo/vector-icons/AntDesign";
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
@@ -32,6 +33,7 @@ export const CustomSelect = ({
         onPress={() => setModalVisible(true)}
       >
         <Text style={styles.selectText}>{selectedLabel}</Text>
+        <AntDesign name="down" size={20} color="black" />
       </TouchableOpacity>
 
       <Modal
@@ -70,8 +72,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.lightGray,
     padding: 12,
+    paddingRight: 16,
     borderRadius: 8,
     backgroundColor: "#f9f9f9",
+    justifyContent: "space-between",
+    flexDirection: "row",
   },
   selectText: {
     fontSize: 16,

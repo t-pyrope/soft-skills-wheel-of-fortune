@@ -9,10 +9,12 @@ import {
 } from "react";
 
 import { ExtendedTask } from "@/types/Task";
-import { getSavedTasks } from "@/utils/getSavedTasks";
-import { setSavedTasks } from "@/utils/setSavedTasks";
-import { getTasksLimit } from "@/utils/getTasksLimit";
-import { setTasksLimit } from "@/utils/setTasksLimit";
+import {
+  getSavedTasks,
+  getTasksLimit,
+  setSavedTasks,
+  setTasksLimit,
+} from "@/utils";
 
 interface ContextProps {
   prize: number | null;

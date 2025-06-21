@@ -91,8 +91,8 @@ export const en = {
     definitions: "Definitions",
     openedTasks: "Opened tasks",
     proposeTask: "Propose a task",
-    privacyPolicy: 'Privacy policy',
-    termsAndConditions: 'Terms and conditions',
+    privacyPolicy: "Privacy policy",
+    termsAndConditions: "Terms and conditions",
   },
   date: {
     month_names: [
@@ -115,5 +115,11 @@ export const en = {
     title: "Propose task",
     skillLabel: "Skill",
     taskDescription: "Task description",
+    email: "Email for communication about the task",
+    send: "Send",
+    errors: {
+      required: "Required",
+      notEmail: "Invalid email",
+    },
   },
 };

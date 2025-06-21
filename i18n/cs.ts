@@ -92,7 +92,7 @@ export const cs = {
     openedTasks: "Otevřené úkoly",
     proposeTask: "Navrhnout úkol",
     privacyPolicy: "Zásady ochrany osobních údajů",
-    termsAndConditions: 'Všeobecné podmínky',
+    termsAndConditions: "Všeobecné podmínky",
   },
   date: {
     month_names: [
@@ -115,5 +115,11 @@ export const cs = {
     title: "Navrhnout úkol",
     skillLabel: "Dovednost",
     taskDescription: "Popis úkolu",
+    email: "Email pro komunikaci ohledně tasku",
+    send: "Poslat",
+    errors: {
+      required: "Vyžadováno",
+      notEmail: "Nevalidní email"
+    },
   },
 };
