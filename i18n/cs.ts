@@ -92,6 +92,7 @@ export const cs = {
     openedTasks: "Otevřené úkoly",
     proposeTask: "Navrhnout úkol",
     privacyPolicy: "Zásady ochrany osobních údajů",
+    termsAndConditions: 'Všeobecné podmínky',
   },
   date: {
     month_names: [

@@ -65,6 +65,20 @@ export default function Layout() {
         />
 
         <Drawer.Screen
+          name="terms-and-conditions"
+          options={{
+            title: i18n.t("menu.termsAndConditions"),
+            sceneStyle:
+              Platform.OS === "web"
+                ? {
+                    flexGrow: 1,
+                    overflow: "scroll",
+                  }
+                : {},
+          }}
+        />
+
+        <Drawer.Screen
           name="propose-task"
           options={{
             title: i18n.t("menu.proposeTask"),

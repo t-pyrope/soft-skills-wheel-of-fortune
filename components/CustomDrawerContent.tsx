@@ -17,7 +17,10 @@ import { Colors } from "@/constants/Colors";
 
 export const CustomDrawerContent = (props: DrawerContentComponentProps) => {
   const routes = props.state.routes.filter(
-    (route) => route.name !== "propose-task" && route.name !== "privacy-policy",
+    (route) =>
+      route.name !== "propose-task" &&
+      route.name !== "privacy-policy" &&
+      route.name !== "terms-and-conditions",
   );
 
   return (
@@ -76,6 +79,9 @@ export const CustomDrawerContent = (props: DrawerContentComponentProps) => {
           <View style={{ alignItems: "center" }}>
             <Link href="/privacy-policy">
               <ThemedText type="link">Privacy policy</ThemedText>
+            </Link>
+            <Link href="/terms-and-conditions">
+              <ThemedText type="link">Terms and conditions</ThemedText>
             </Link>
           </View>
         </View>

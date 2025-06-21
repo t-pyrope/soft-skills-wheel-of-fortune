@@ -92,6 +92,7 @@ export const en = {
     openedTasks: "Opened tasks",
     proposeTask: "Propose a task",
     privacyPolicy: 'Privacy policy',
+    termsAndConditions: 'Terms and conditions',
   },
   date: {
     month_names: [

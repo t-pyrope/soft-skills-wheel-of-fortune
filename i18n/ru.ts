@@ -92,6 +92,7 @@ export const ru = {
     openedTasks: "Открытые задания",
     proposeTask: "Предложить задание",
     privacyPolicy: "Политика конфиденциальности",
+    termsAndConditions: "Условия и положения",
   },
   date: {
     month_names: [
