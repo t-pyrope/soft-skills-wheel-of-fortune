@@ -117,6 +117,10 @@ export const en = {
     taskDescription: "Task description",
     email: "Email for communication about the task",
     send: "Send",
+    agreeWith: "I agree with the",
+    privacyPolicy: "Privacy Policy",
+    and: "and",
+    termsAndConditions: "Terms and Conditions",
     errors: {
       required: "Required",
       notEmail: "Invalid email",

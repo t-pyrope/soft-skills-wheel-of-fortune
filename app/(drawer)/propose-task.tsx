@@ -1,5 +1,7 @@
-import { Formik } from "formik";
-import { StyleSheet, View } from "react-native";
+import { Formik, FormikHelpers } from "formik";
+import { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import Toast from "react-native-toast-message";
 
 import { Button } from "@/components/ui/Button";
 import { Header } from "@/components/Header";
@@ -8,7 +10,10 @@ import { TextField } from "@/components/ui/TextField";
 import { ThemedSafeAreaView } from "@/components/ui/ThemedSafeAreaView";
 import { DEFINITIONS } from "@/constants/softSkills";
 import { i18n } from "@/i18n/config";
-import {isEmail} from "@/utils";
+import { isEmail } from "@/utils";
+import { Checkbox } from "@/components/ui/Checkbox";
+import { Link } from "expo-router";
+import { ThemedText } from "@/components/ThemedText";
 
 interface FormikValues {
   skill: number;
@@ -17,7 +22,11 @@ interface FormikValues {
 }
 
 export default function ProposeTask() {
-  const onSendPress = async (values: FormikValues) => {
+  const [isAgree, setIsAgree] = useState(false);
+  const onSendPress = async (
+    values: FormikValues,
+    { resetForm }: FormikHelpers<FormikValues>,
+  ) => {
     try {
       const res = await fetch(
         "https://soft-skills.begaiym.dev/.netlify/functions/sendTask",
@@ -29,11 +38,19 @@ export default function ProposeTask() {
           body: JSON.stringify(values),
         },
       );
-      const json = await res.json();
-
-      console.log(json);
+      Toast.show({
+        type: "success",
+        text1: "Task sent successfully",
+        position: "bottom",
+      });
+      resetForm();
     } catch (e) {
       console.error(e);
+      Toast.show({
+        type: "error",
+        text1: "Something went wrong",
+        position: "bottom",
+      });
     }
   };
 
@@ -90,10 +107,31 @@ export default function ProposeTask() {
             error={errors.email}
           />
 
+          <Checkbox
+            isChecked={isAgree}
+            setIsChecked={setIsAgree}
+            label={
+              <>
+                <Text>{i18n.t("proposeTask.agreeWith")} </Text>
+                <Link href="/privacy-policy">
+                  <ThemedText type="link">
+                    {i18n.t("proposeTask.privacyPolicy")}
+                  </ThemedText>
+                </Link>{" "}
+                <Text>{i18n.t("proposeTask.and")}</Text>{" "}
+                <Link href="/terms-and-conditions">
+                  <ThemedText type="link">
+                    {i18n.t("proposeTask.termsAndConditions")}
+                  </ThemedText>
+                </Link>
+              </>
+            }
+          />
+
           <View style={{ width: 200 }}>
             <Button
               onPress={handleSubmit}
-              disabled={false}
+              disabled={!isAgree}
               text={i18n.t("proposeTask.send")}
             />
           </View>

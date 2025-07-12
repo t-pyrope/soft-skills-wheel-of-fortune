@@ -117,6 +117,10 @@ export const cs = {
     taskDescription: "Popis úkolu",
     email: "Email pro komunikaci ohledně tasku",
     send: "Poslat",
+    agreeWith: "Souhlasím se zásadami",
+    privacyPolicy: "ochrany osobních údajů",
+    and: "a",
+    termsAndConditions: "smluvními podmínkami",
     errors: {
       required: "Vyžadováno",
       notEmail: "Nevalidní email"

@@ -117,6 +117,10 @@ export const ru = {
     taskDescription: "Описание задания",
     email: "Email для связи о задании",
     send: "Отправить",
+    agreeWith: "Я согласен(а) с",
+    privacyPolicy: "политикой конфиденциальности",
+    and: "и",
+    termsAndConditions: "условиями пользования",
     errors: {
       required: "Обязательное поле",
       notEmail: "Недействительный email",
